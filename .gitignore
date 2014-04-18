@@ -13,8 +13,10 @@
 x64/
 build/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
+_delete/
+_binary/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
