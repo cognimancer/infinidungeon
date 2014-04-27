@@ -1,7 +1,11 @@
 #ifndef ABSTRACTSCREEN_H
 #define ABSTRACTSCREEN_H
 
-#include <Angel/Angel.h>
+#include <iostream>
+#include <GL\glew.h>
+#include <GL\freeglut.h>
+//#include <GL\freeglut_ext.h>
+#include "AngelShaderCompiler.h"
 #include "View.h"
 
 // Abstract class for screens. Implementing classes are strategies for the View

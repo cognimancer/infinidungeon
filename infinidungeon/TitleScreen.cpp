@@ -24,6 +24,7 @@ void TitleScreen::display() {
 void TitleScreen::keyboard( unsigned char key, int x, int y ) {
 	switch ( key ) {
 	case ' ':
+		std::cout << "going to dungeon screen" << std::endl;
 		_view->changeScreen( View::Dungeon );
 		break;
 	case 27: // esc

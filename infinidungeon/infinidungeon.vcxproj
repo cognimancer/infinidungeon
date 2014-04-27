@@ -14,8 +14,10 @@
     <ResourceCompile Include="..\res\ICON.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\Angel\InitShader.cpp" />
     <ClCompile Include="AbstractScreen.cpp" />
+    <ClCompile Include="AngelShaderCompiler.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DisplayObject.cpp" />
     <ClCompile Include="DungeonScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
@@ -24,7 +26,11 @@
   <ItemGroup>
     <ClInclude Include="..\res\resource.h" />
     <ClInclude Include="AbstractScreen.h" />
+    <ClInclude Include="AngelShaderCompiler.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="DisplayObject.h" />
     <ClInclude Include="DungeonScreen.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>

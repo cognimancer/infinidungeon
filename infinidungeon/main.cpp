@@ -1,16 +1,18 @@
 //#include <vld.h>
 //#include <vector>
-#include "Angel/Angel.h"
+#include <GL\glew.h>
+#include <GL\freeglut.h>
+//#include <GL\freeglut_ext.h>
 #include "View.h"
 //#include <stdlib.h>
 //#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")  
 
 View *view;
 
-int main( int argc, char **argv ) {	
+int main( int argc, char **argv ) {
 	glutInit( &argc, argv );
-	//glutInitContextVersion( 3, 2 );
-	//glutInitContextProfile( GLUT_CORE_PROFILE );
+//	glutInitContextVersion( 3, 2 );
+//	glutInitContextProfile( GLUT_CORE_PROFILE );
 	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
 	glutSetOption( GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION );
 	glutInitWindowSize( 640, 480 );
@@ -21,7 +23,7 @@ int main( int argc, char **argv ) {
 	glewInit();
 
 	view = new View();
-	view->changeScreen( View::Title );
+	view->changeScreen( View::Dungeon );
     glutDisplayFunc( view->display );
 	glutIdleFunc( view->idle );
 	glutKeyboardFunc( view->keyboard );

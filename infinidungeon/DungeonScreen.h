@@ -2,11 +2,19 @@
 #define DUNGEONSCREEN_H
 
 #include "AbstractScreen.h"
+#include "Cube.h"
 
 class DungeonScreen : public AbstractScreen {
 private:
 	float initialTime;
 	float finalTime;
+	Cube *_shape;
+	bool _moveForward;
+	bool _moveBackward;
+	bool _moveRight;
+	bool _moveLeft;
+	bool _rotateRight;
+	bool _rotateLeft;
 
 public:
 	DungeonScreen( View *view );
