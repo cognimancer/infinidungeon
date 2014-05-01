@@ -49,10 +49,10 @@ void DungeonScreen::idle() {
 	if(_moveLeft) directions.y = 1;
 	if(_moveForward) directions.x = 1;
 	if(_moveBackward) directions.x = -1;
-	if(_rotateRight) rotation.x = 0.02;
-	if(_rotateLeft) rotation.x = -0.02;
-	if(_rotateUp) rotation.y = -0.02;
-	if(_rotateDown) rotation.y = 0.02;
+	if(_rotateRight) rotation.x = 0.02f;
+	if(_rotateLeft) rotation.x = -0.02f;
+	if(_rotateUp) rotation.y = -0.02f;
+	if(_rotateDown) rotation.y = 0.02f;
 
 	Camera::getInstance()->move(directions, rotation, 1.0f);
 

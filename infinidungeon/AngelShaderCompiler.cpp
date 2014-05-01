@@ -9,7 +9,7 @@ readShaderSource(const char* shaderFile)
     FILE* fp;
     #ifdef WIN32
         errno_t err;
-        if( (err  = fopen_s( &fp, shaderFile, "r" )) !=0 ) {
+        if( (err  = fopen_s( &fp, shaderFile, "rb" )) !=0 ) {
     #else
         if ((fp_config = fopen(shaderFile, "r")) == NULL) {
     #endif
