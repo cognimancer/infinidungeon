@@ -11,11 +11,7 @@ public:
 	static Camera* getInstance(); // Singleton Accessor
 	void releaseInstance();	//Singleton Destructor
 
-	//Translate
-	void moveSideways( float a_fDistance = 0.1f );
-	void moveVertical( float a_fDistance = 0.1f );
-	void moveForward( float a_fDistance = 0.1f );
-	void rotate( float a_fAngle = 0.1f );
+	void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
 	
 	//Projection
 	void setProjection();
@@ -50,6 +46,11 @@ private:
 	glm::mat4 m_mView;
 	//MVP
 	glm::mat4 m_mMVP;
+
+	//Position
+	glm::vec3 _position;
+	//Orientation
+	glm::quat _orientation;
 };
 
 

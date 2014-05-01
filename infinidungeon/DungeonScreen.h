@@ -15,6 +15,8 @@ private:
 	bool _moveLeft;
 	bool _rotateRight;
 	bool _rotateLeft;
+	bool _rotateUp;
+	bool _rotateDown;
 
 public:
 	DungeonScreen( View *view );
