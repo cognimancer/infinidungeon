@@ -9,8 +9,13 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_rotateRight( false ),
 		_rotateLeft( false ),
 		_rotateUp( false ),
-		_rotateDown( false ),
-		_shape( new Cube() ) {
+		_rotateDown( false )
+		//_shape( new Cube() ),
+		{
+			_modelMan = ModelManagerClass::GetInstance();
+			_modelMan->LoadModel("Earth.obj", "Earth");
+			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
+			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 }
 
 DungeonScreen::DungeonScreen( const DungeonScreen &other ) : AbstractScreen( other._view ),
@@ -28,19 +33,28 @@ DungeonScreen &DungeonScreen::operator=( const DungeonScreen &other ) {
 }
 
 DungeonScreen::~DungeonScreen() {
-	delete _shape;
+	delete _modelMan;
 }
 
 void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
-	_shape->render();
+	//_shape->render();
+	matrix4 matrix = _modelMan->GetModelMatrix("Earth");
+	//matrix = glm::translate(matrix, vector3(0.5f, 0.0f, 0.0f));
+	matrix = matrix4();
+	_modelMan->SetModelMatrix(matrix, "Earth");
+
+	_modelMan->RenderModel();
 	glutSwapBuffers();
 } // display
 
 void DungeonScreen::idle() {
 	finalTime = (float)glutGet( GLUT_ELAPSED_TIME );
 	float dt = (finalTime - initialTime)/500;
+
+	//std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
+	//std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 
 	glm::vec2 rotation;
 	glm::vec3 directions;

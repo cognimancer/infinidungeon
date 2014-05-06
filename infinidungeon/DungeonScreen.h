@@ -3,12 +3,14 @@
 
 #include "AbstractScreen.h"
 #include "Cube.h"
+#include "ModelClass.h"
+#include "ModelManagerClass.h"
 
 class DungeonScreen : public AbstractScreen {
 private:
 	float initialTime;
 	float finalTime;
-	Cube *_shape;
+	//ModelClass *_shape;
 	bool _moveForward;
 	bool _moveBackward;
 	bool _moveRight;
@@ -17,6 +19,7 @@ private:
 	bool _rotateLeft;
 	bool _rotateUp;
 	bool _rotateDown;
+	ModelManagerClass* _modelMan;
 
 public:
 	DungeonScreen( View *view );

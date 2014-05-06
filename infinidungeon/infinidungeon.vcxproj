@@ -19,7 +19,18 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DisplayObject.cpp" />
     <ClCompile Include="DungeonScreen.cpp" />
+    <ClCompile Include="FileReaderClass.cpp" />
+    <ClCompile Include="FolderClass.cpp" />
+    <ClCompile Include="InstanceClass.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MaterialClass.cpp" />
+    <ClCompile Include="MaterialManagerClass.cpp" />
+    <ClCompile Include="ModelClass.cpp" />
+    <ClCompile Include="ModelManagerClass.cpp" />
+    <ClCompile Include="ShapeClass.cpp" />
+    <ClCompile Include="SystemClass.cpp" />
+    <ClCompile Include="TextureClass.cpp" />
+    <ClCompile Include="TextureManagerClass.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
@@ -31,6 +42,17 @@
     <ClInclude Include="DisplayObject.h" />
     <ClInclude Include="DungeonScreen.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="FileReaderClass.h" />
+    <ClInclude Include="FolderClass.h" />
+    <ClInclude Include="InstanceClass.h" />
+    <ClInclude Include="MaterialClass.h" />
+    <ClInclude Include="MaterialManagerClass.h" />
+    <ClInclude Include="ModelClass.h" />
+    <ClInclude Include="ModelManagerClass.h" />
+    <ClInclude Include="ShapeClass.h" />
+    <ClInclude Include="SystemClass.h" />
+    <ClInclude Include="TextureClass.h" />
+    <ClInclude Include="TextureManagerClass.h" />
     <ClInclude Include="TitleScreen.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
@@ -96,7 +118,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;freeglut.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;freeglut.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
