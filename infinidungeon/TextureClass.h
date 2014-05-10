@@ -3,16 +3,16 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 --------------------------------------------------------------------------------------------------*/
 #ifndef _TEXTURECLASS_H
 #define _TEXTURECLASS_H
-
-#include "SystemClass.h"
-#include "SOIL\SOIL.h"
+#include <string>
+#include <GL\freeglut.h>
+#include <SOIL\SOIL.h>
+#include "FolderClass.h"
 
 class TextureClass
 {
-	SystemClass* m_pSystem;
 	GLuint m_nGLTextureID;
-	String m_sName;
-	String m_sFileName;
+	std::string m_sName;
+	std::string m_sFileName;
 public:
 	TextureClass(void); //Constructor
 	TextureClass(const TextureClass& other); //Copy Constructor
@@ -20,14 +20,14 @@ public:
 	void Release(void); //Release the fields in the class
 	~TextureClass(void); //Destructor
 
-	void LoadTexture(String a_sFileName);
+	void LoadTexture(std::string a_sFileName);
 //Accessors
 	GLuint GetGLTextureID(void); //Returns the OpenGL Identifier
 	__declspec(property(get = GetGLTextureID)) GLuint GLTextureID;
-	String GetTextureName(void); //Returns the name of the texture
-	__declspec(property(get = GetTextureName)) String TextureName;
-	String GetTextureFileName(void); //Returns the filename of the texture
-	__declspec(property(get = GetTextureFileName)) String TextureFileName;
+	std::string GetTextureName(void); //Returns the name of the texture
+	__declspec(property(get = GetTextureName)) std::string TextureName;
+	std::string GetTextureFileName(void); //Returns the filename of the texture
+	__declspec(property(get = GetTextureFileName)) std::string TextureFileName;
 
 private:
 	void Init(void); //Initializes the variables

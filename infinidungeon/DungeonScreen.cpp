@@ -40,9 +40,9 @@ void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
 	//_shape->render();
-	matrix4 matrix = _modelMan->GetModelMatrix("BasicRoomTex");
+	glm::mat4 matrix = _modelMan->GetModelMatrix("BasicRoomTex");
 	//matrix = glm::translate(matrix, vector3(0.5f, 0.0f, 0.0f));
-	matrix = matrix4();
+	matrix = glm::mat4();
 	_modelMan->SetModelMatrix(matrix, "BasicRoomTex");
 
 	_modelMan->RenderModel();

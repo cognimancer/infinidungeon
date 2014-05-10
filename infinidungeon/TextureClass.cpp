@@ -7,20 +7,18 @@ TextureClass::~TextureClass(void) { Release(); }
 
 void TextureClass::Release(void)
 {
-	m_pSystem = nullptr;
 	glDeleteTextures(1, &m_nGLTextureID);
 }
 void TextureClass::Init(void)
 {
 	m_nGLTextureID = -1;
-	m_pSystem = SystemClass::GetInstance();
 }
-void TextureClass::LoadTexture(String a_sFileName)
+void TextureClass::LoadTexture(std::string a_sFileName)
 {
 	m_sName = a_sFileName;
-	m_sFileName = m_pSystem->m_pFolder->Root;
-	m_sFileName += m_pSystem->m_pFolder->Data;
-	m_sFileName += m_pSystem->m_pFolder->Textures;
+	m_sFileName = FolderClass::GetInstance()->Root;
+	m_sFileName += FolderClass::GetInstance()->Data;
+	m_sFileName += FolderClass::GetInstance()->Textures;
 	m_sFileName += m_sName;
 
 	if(m_nGLTextureID == -1)
@@ -46,5 +44,5 @@ void TextureClass::LoadTexture(String a_sFileName)
 }
 //Accessors
 GLuint TextureClass::GetGLTextureID(void){return m_nGLTextureID;}
-String TextureClass::GetTextureName(void){return m_sName;}
-String TextureClass::GetTextureFileName(void){return m_sFileName;}
+std::string TextureClass::GetTextureName(void){return m_sName;}
+std::string TextureClass::GetTextureFileName(void){return m_sFileName;}

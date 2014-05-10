@@ -35,22 +35,20 @@ ModelClass::~ModelClass(void) { Release(); }
 void ModelClass::Release(void)
 {
 	m_vShape.clear();
-	m_pSystem = nullptr;
 	m_pMaterialManager = nullptr;
 	m_sModelName = "";
 }
 void ModelClass::Init(void)
 {
-	m_pSystem = SystemClass::GetInstance();
 	m_pMaterialManager = MaterialManagerClass::GetInstance();
 	m_sModelName = "";
 }
 Results ModelClass::LoadMTL(String a_sFileName)
 {
 	String sAbsoluteRoute;
-	sAbsoluteRoute = m_pSystem->m_pFolder->Root;
-	sAbsoluteRoute += m_pSystem->m_pFolder->Data;
-	sAbsoluteRoute += m_pSystem->m_pFolder->MOBJ;
+	sAbsoluteRoute = FolderClass::GetInstance()->Root;
+	sAbsoluteRoute += FolderClass::GetInstance()->Data;
+	sAbsoluteRoute += FolderClass::GetInstance()->MOBJ;
 	sAbsoluteRoute += a_sFileName;
 	
 	FileReaderClass reader;
@@ -86,9 +84,9 @@ Results ModelClass::LoadMTL(String a_sFileName)
 Results ModelClass::LoadOBJ(String a_sFileName)
 {
 	String sAbsoluteRoute;
-	sAbsoluteRoute = m_pSystem->m_pFolder->Root;
-	sAbsoluteRoute += m_pSystem->m_pFolder->Data;
-	sAbsoluteRoute += m_pSystem->m_pFolder->MOBJ;
+	sAbsoluteRoute = FolderClass::GetInstance()->Root;
+	sAbsoluteRoute += FolderClass::GetInstance()->Data;
+	sAbsoluteRoute += FolderClass::GetInstance()->MOBJ;
 	sAbsoluteRoute += a_sFileName;
 
 	m_sModelName = a_sFileName;
@@ -112,9 +110,9 @@ Results ModelClass::LoadOBJ(String a_sFileName)
 
 	reader.Rewind();
 	int nGroupIndex = -1;
-	std::vector<vector3> vPosition; //Vector of Vertices
-	std::vector<vector3> vNormal; //Vecotr of Normals
-	std::vector<vector2> vUV; //vector of UVS
+	std::vector<glm::vec3> vPosition; //Vector of Vertices
+	std::vector<glm::vec3> vNormal; //Vecotr of Normals
+	std::vector<glm::vec2> vUV; //vector of UVS
 	int nMaterial = 0;
 
 	while(reader.ReadNextLine() != DONE)
@@ -128,17 +126,17 @@ Results ModelClass::LoadOBJ(String a_sFileName)
 			if(reader.m_sLine[1] == ' ')
 			{
 				sscanf_s(reader.m_sLine.c_str(), "v %f %f %f", &x, &y, &z);
-				vPosition.push_back(vector3( x, y, z ));
+				vPosition.push_back(glm::vec3( x, y, z ));
 			}
 			else if(reader.m_sLine[1] == 't')
 			{
 				sscanf_s(reader.m_sLine.c_str(), "vt %f %f", &x, &y);
-				vUV.push_back( vector2(x, y));
+				vUV.push_back( glm::vec2(x, y));
 			}
 			else if(reader.m_sLine[1] == 'n')
 			{
 				sscanf_s(reader.m_sLine.c_str(), "vn %f %f %f", &x, &y, &z);
-				vNormal.push_back(vector3( x, y, z ));
+				vNormal.push_back(glm::vec3( x, y, z ));
 			}
 		}
 #pragma endregion
@@ -265,9 +263,9 @@ Results ModelClass::LoadOBJ(String a_sFileName)
 			m_vShape[nGroupIndex].AddVertexPosition(vPosition[nP2-1]);
 			m_vShape[nGroupIndex].AddVertexPosition(vPosition[nP3-1]);
 
-			m_vShape[nGroupIndex].AddVertexColor(vector3(1.0f,1.0f,1.0f));
-			m_vShape[nGroupIndex].AddVertexColor(vector3(1.0f,1.0f,1.0f));
-			m_vShape[nGroupIndex].AddVertexColor(vector3(1.0f,1.0f,1.0f));
+			m_vShape[nGroupIndex].AddVertexColor(glm::vec3(1.0f,1.0f,1.0f));
+			m_vShape[nGroupIndex].AddVertexColor(glm::vec3(1.0f,1.0f,1.0f));
+			m_vShape[nGroupIndex].AddVertexColor(glm::vec3(1.0f,1.0f,1.0f));
 
 			m_vShape[nGroupIndex].AddVertexUV(vUV[nT1-1]);
 			m_vShape[nGroupIndex].AddVertexUV(vUV[nT2-1]);

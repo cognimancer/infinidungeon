@@ -159,34 +159,34 @@ glm::mat4& ShapeClass::GetModelMatrix(void)
 
 void ShapeClass::AddVertexPosition(const float x, const float y, const float z)
 {
-	AddVertexPosition(vector3(x,y,z));
+	AddVertexPosition(glm::vec3(x,y,z));
 }
-void ShapeClass::AddVertexPosition(vector3 input)
+void ShapeClass::AddVertexPosition(glm::vec3 input)
 {
 	m_vVertexPosition.push_back(input);
 	m_nVertices++;
 }
 void ShapeClass::AddVertexColor(const float r, const float g, const float b)
 {
-	AddVertexColor(vector3(r,g,b));
+	AddVertexColor(glm::vec3(r,g,b));
 }
-void ShapeClass::AddVertexColor(vector3 input)
+void ShapeClass::AddVertexColor(glm::vec3 input)
 {
 	m_vVertexColor.push_back(input);
 }
 void ShapeClass::AddVertexNormal(const float x, const float y, const float z)
 {
-	AddVertexNormal(vector3(x,y,z));
+	AddVertexNormal(glm::vec3(x,y,z));
 }
-void ShapeClass::AddVertexNormal(vector3 input)
+void ShapeClass::AddVertexNormal(glm::vec3 input)
 {
 	m_vVertexNormal.push_back(input);
 }
 void ShapeClass::AddVertexUV(const float u, const float v)
 {
-	AddVertexUV(vector2(u,v));
+	AddVertexUV(glm::vec2(u,v));
 }
-void ShapeClass::AddVertexUV(vector2 input)
+void ShapeClass::AddVertexUV(glm::vec2 input)
 {
 	m_vVertexUV.push_back(input);
 }
@@ -206,17 +206,17 @@ void ShapeClass::InitGPU(String a_sVShaderFile, String a_sFShaderFile)
 	// Create and initialize a buffer object for each shape.
 	glGenBuffers( 1, &m_VertexBuffer );
 	glBindBuffer( GL_ARRAY_BUFFER, m_VertexBuffer );
-	glBufferData( GL_ARRAY_BUFFER, m_nVertices * sizeof(vector3), &m_vVertexPosition[0], GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, m_nVertices * sizeof(glm::vec3), &m_vVertexPosition[0], GL_STATIC_DRAW );
 
 	//Initialize the color buffer for the object.
 	glGenBuffers(1, &m_ColorBuffer);
 	glBindBuffer( GL_ARRAY_BUFFER, m_ColorBuffer);
-	glBufferData( GL_ARRAY_BUFFER, m_nVertices * sizeof(vector3), &m_vVertexColor[0], GL_STATIC_DRAW );
+	glBufferData( GL_ARRAY_BUFFER, m_nVertices * sizeof(glm::vec3), &m_vVertexColor[0], GL_STATIC_DRAW );
 
 	//Initialize the UV Buffer for the object
 	glGenBuffers(1, &m_UVBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_UVBuffer);
-	glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(vector2), &m_vVertexUV[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(glm::vec2), &m_vVertexUV[0], GL_STATIC_DRAW);
 
 	m_sVShaderFile = a_sVShaderFile;
 	m_sFShaderFile = a_sFShaderFile;

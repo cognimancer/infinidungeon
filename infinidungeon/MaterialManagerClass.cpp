@@ -24,11 +24,9 @@ void  MaterialManagerClass::Release(void)
 		delete temp;
 	}
 	m_vMaterial.clear();
-	m_pSystem = nullptr;
 }
 void MaterialManagerClass::Init(void)
 {
-	m_pSystem = SystemClass::GetInstance();
 }
 
 int MaterialManagerClass::AddMaterial(String a_sName)

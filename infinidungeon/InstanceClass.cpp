@@ -32,7 +32,6 @@ void InstanceClass::Release(void)
 }
 void InstanceClass::Init(void)
 {
-	m_pSystem = SystemClass::GetInstance();
 	m_pMaterialManager = MaterialManagerClass::GetInstance();
 	m_sName = "";
 }

@@ -140,9 +140,9 @@ void ModelManagerClass::SetModelMatrix(glm::mat4 a_mMatrix, String a_sInstance)
 		}
 	}
 }
-matrix4 ModelManagerClass::GetModelMatrix(String a_sInstance)
+glm::mat4 ModelManagerClass::GetModelMatrix(String a_sInstance)
 {
-	matrix4 matrix = matrix4(1.0f);
+	glm::mat4 matrix = glm::mat4(1.0f);
 	int nInstance = IdentifyInstance(a_sInstance);
 	if(nInstance >= 0)
 	{
