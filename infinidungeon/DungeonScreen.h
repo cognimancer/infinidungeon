@@ -10,7 +10,6 @@ class DungeonScreen : public AbstractScreen {
 private:
 	float initialTime;
 	float finalTime;
-	//ModelClass *_shape;
 	bool _moveForward;
 	bool _moveBackward;
 	bool _moveRight;
@@ -19,6 +18,7 @@ private:
 	bool _rotateLeft;
 	bool _rotateUp;
 	bool _rotateDown;
+	bool _sprinting;
 	ModelManagerClass* _modelMan;
 
 public:
