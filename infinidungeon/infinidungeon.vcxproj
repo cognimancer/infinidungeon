@@ -124,10 +124,14 @@
     <PostBuildEvent>
       <Command>mkdir “$(SolutionDir)_binary\”
 mkdir “$(SolutionDir)_binary\shaders\”
+mkdir "$(SolutionDir)_binary\Data\"
+mkdir "$(SolutionDir)_binary\Data\MOBJ\"
+mkdir "$(SolutionDir)_binary\Data\Textures\"
 copy “$(OutDir)$(TargetName)$(TargetExt)” “$(SolutionDir)_binary”
 xcopy "$(SolutionDir)include\GL\x86\bin" "$(SolutionDir)_binary" /y
 xcopy "$(SolutionDir)$(SolutionName)\shaders" "$(SolutionDir)_binary\shaders" /y
-</Command>
+xcopy "$(SolutionDir)res\Models" "$(SolutionDir)_binary\Data\MOBJ" /y
+xcopy "$(SolutionDir)res\Textures" "$(SolutionDir)_binary\Data\Textures" /y</Command>
       <Message>Copying binary...</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
