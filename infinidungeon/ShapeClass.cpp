@@ -256,6 +256,7 @@ void ShapeClass::Render (GLenum mode)
 	GLuint model = glGetUniformLocation(m_ShaderProgram, "model");
 	GLuint lightPos = glGetUniformLocation(m_ShaderProgram, "lPosition");
 	GLuint lightInt = glGetUniformLocation(m_ShaderProgram, "lIntensities");
+	GLuint lightFact = glGetUniformLocation(m_ShaderProgram, "lFactor");
 	
 	// Final Projection of the Camera
 	glm::mat4 MVP = m_pCamera->calculateProjection(m_mModel);
@@ -265,6 +266,7 @@ void ShapeClass::Render (GLenum mode)
 	//Light
 	glUniform3fv(lightPos, 1, glm::value_ptr(m_pCamera->getPosition()));
 	glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(1.0f)));
+	glUniform1f(lightFact, 100.0f);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);

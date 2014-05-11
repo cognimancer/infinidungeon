@@ -30,6 +30,9 @@ int main( int argc, char **argv ) {
 	glutKeyboardUpFunc( view->keyboardUp );
 	glutSpecialFunc( view->special );
 	glutSpecialUpFunc( view->specialUp );
+	glutMotionFunc( view->mouseMotion );
+	glutPassiveMotionFunc( view->mousePassive );
+	glutSetCursor( GLUT_CURSOR_NONE );
 
     glutMainLoop();
 

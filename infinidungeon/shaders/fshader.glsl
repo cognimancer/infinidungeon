@@ -11,6 +11,7 @@ uniform mat4 model;
 uniform int nTexture = 0;
 uniform vec3 lPosition;
 uniform vec3 lIntensities;
+uniform float lFactor;
 
 void main()
 {
@@ -25,9 +26,10 @@ void main()
 	vec3 surfaceToLight = lPosition - fragPosition;
 
     //calculate the cosine of the angle of incidence (brightness)
-    float brightness = dot(normal, surfaceToLight) / (length(surfaceToLight) * length(normal));
+	float distance = length(surfaceToLight);
+    float brightness = dot(normal, surfaceToLight) / (distance * length(normal));
 	// distance factor
-	brightness = brightness * 4.0 / length(surfaceToLight);
+	brightness = brightness * lFactor / distance / distance;
     brightness = clamp(brightness, 0, 1);
 
 	if(nTexture == 0)

@@ -29,6 +29,8 @@ public:
 	static void keyboardUp( unsigned char key, int x, int y );
 	static void special( int key, int x, int y );
 	static void specialUp( int key, int x, int y );
+	static void mouseMotion( int x, int y );
+	static void mousePassive( int x, int y );
 };
 
 #endif

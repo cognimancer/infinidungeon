@@ -46,3 +46,11 @@ void View::special( int key, int x, int y ) {
 void View::specialUp( int key, int x, int y ) {
 	currentInstance->specialUp( key, x, y );
 }
+
+void View::mouseMotion( int x, int y ) {
+	currentInstance->mouseMotion( x, y );
+}
+
+void View::mousePassive( int x, int y ) {
+	currentInstance->mousePassive( x, y );
+}

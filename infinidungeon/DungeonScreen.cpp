@@ -9,13 +9,15 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_rotateRight( false ),
 		_rotateLeft( false ),
 		_rotateUp( false ),
-		_rotateDown( false )
+		_rotateDown( false ),
+		_lookUpDown( 0.0f ),
+		_lookLeftRight( 0.0f ),
+		_sprinting( false )
 		{
 			_modelMan = ModelManagerClass::GetInstance();
 			_modelMan->LoadModel("BasicRoomTex.obj", "BasicRoomTex");
 			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
-			_sprinting = false;
 }
 
 DungeonScreen::DungeonScreen( const DungeonScreen &other ) : AbstractScreen( other._view ),
@@ -56,21 +58,24 @@ void DungeonScreen::idle() {
 	//std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 	//std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 
-	glm::vec2 rotation;
-	glm::vec3 directions;
-	float timeframe = 1.0f;
+	Camera::getInstance()->setSpeed( _sprinting ? 9.0f : 3.0f );
+	glm::vec2 rotation = glm::vec2(0.0f);
+	glm::vec3 directions = glm::vec3(0.0f);
 
-	if(_moveRight) directions.y = -1;
-	if(_moveLeft) directions.y = 1;
-	if(_moveForward) directions.x = 1;
-	if(_moveBackward) directions.x = -1;
-	if(_rotateRight) rotation.x = 0.02f;
-	if(_rotateLeft) rotation.x = -0.02f;
-	if(_rotateUp) rotation.y = -0.02f;
-	if(_rotateDown) rotation.y = 0.02f;
-	if(_sprinting) timeframe = 3.0f;
+	if(_moveRight) directions.y -= 1.0f;
+	if(_moveLeft) directions.y += 1.0f;
+	if(_moveForward) directions.x += 1.0f;
+	if(_moveBackward) directions.x -= 1.0f;
+	if(_rotateRight) rotation.x += 0.02f;
+	if(_rotateLeft) rotation.x -= 0.02f;
+	if(_rotateUp) rotation.y -= 0.02f;
+	if(_rotateDown) rotation.y += 0.02f;
+	if(_lookLeftRight != 0.0f) rotation.x += _lookLeftRight;
+	if(_lookUpDown != 0.0f) rotation.y += _lookUpDown;
+	if(_lookLeftRight || _lookUpDown ) 
+		glutWarpPointer( 320, 240 );
 
-	Camera::getInstance()->move(directions, rotation, timeframe);
+	Camera::getInstance()->move(directions, rotation, dt);
 
 	glutPostRedisplay();
 	initialTime = finalTime;
@@ -158,3 +163,11 @@ void DungeonScreen::specialUp( int key, int x, int y ) {
 		break;
 	}
 } // specialUp
+
+void DungeonScreen::mouseMotion( int x, int y ) {
+} //mouseMotion
+
+void DungeonScreen::mousePassive( int x, int y ) {
+	_lookLeftRight = 0.002f * (x - 320);
+	_lookUpDown = 0.002f * (y - 240);
+} // mousePassive

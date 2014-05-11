@@ -26,6 +26,7 @@ void Camera::init() {
 	setProjection();
 	setView();
 	calculateProjection();
+	_speed = 3.0f;
 }
 
 //Projection
@@ -62,11 +63,13 @@ glm::mat4 Camera::getMVP() {
 	return m_mMVP;
 }
 
+void Camera::setSpeed( float speed ) {
+	_speed = speed;
+}
+
 // http://stackoverflow.com/questions/19738805/opengl-camera-control-with-arrow-keys
 // modified to eliminate y-axis movement with forward/backward
-void Camera::move(glm::vec3 directions, glm::vec2 rotations, float frametime)
-{
-	float _speed = .1f;
+void Camera::move( glm::vec3 directions, glm::vec2 rotations, float frametime ) {
     auto pitch = glm::quat(glm::vec3(-rotations.y, 0, 0.f));
     auto yaw = glm::quat(glm::vec3(0, -rotations.x, 0.f));
 

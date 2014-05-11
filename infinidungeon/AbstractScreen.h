@@ -39,6 +39,12 @@ public:
 	// glut special keyboard up function
 	virtual void specialUp( int key, int x, int y ) = 0;
 
+	// glut mouse motion function (mouse moved while button pressed)
+	virtual void mouseMotion( int x, int y ) = 0;
+
+	// glut mouse passive motion function (mouse moved with no button pressed)
+	virtual void mousePassive( int x, int y ) = 0;
+
 protected:
 	// prints the string to the screen starting at the given coordinates
 	void printText( int x, int y, std::string String );

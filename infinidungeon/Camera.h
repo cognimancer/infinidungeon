@@ -15,6 +15,7 @@ public:
 		return _position;
 	}
 
+	void setSpeed( float speed );
 	void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
 	
 	//Projection
@@ -55,6 +56,8 @@ private:
 	glm::vec3 _position;
 	//Orientation
 	glm::quat _orientation;
+	//Speed
+	float _speed;
 };
 
 

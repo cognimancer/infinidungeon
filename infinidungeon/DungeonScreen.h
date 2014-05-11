@@ -18,6 +18,8 @@ private:
 	bool _rotateLeft;
 	bool _rotateUp;
 	bool _rotateDown;
+	float _lookUpDown;
+	float _lookLeftRight;
 	bool _sprinting;
 	ModelManagerClass* _modelMan;
 
@@ -34,6 +36,8 @@ public:
 	void keyboardUp( unsigned char key, int x, int y );
 	void special( int key, int x, int y );
 	void specialUp( int key, int x, int y );
+	void mouseMotion( int x, int y );
+	void mousePassive( int x, int y );
 };
 
 #endif
