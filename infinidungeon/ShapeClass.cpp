@@ -1,4 +1,5 @@
 #include "ShapeClass.h"
+#include <iostream>
 void ShapeClass::Init(void)
 {
 	m_vao = 0;
@@ -218,6 +219,10 @@ void ShapeClass::InitGPU(String a_sVShaderFile, String a_sFShaderFile)
 	glBindBuffer(GL_ARRAY_BUFFER, m_UVBuffer);
 	glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(glm::vec2), &m_vVertexUV[0], GL_STATIC_DRAW);
 
+	glGenBuffers(1, &m_NormalBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
+	glBufferData(GL_ARRAY_BUFFER, m_nVertices * sizeof(glm::vec3), &m_vVertexNormal[0], GL_STATIC_DRAW);
+
 	m_sVShaderFile = a_sVShaderFile;
 	m_sFShaderFile = a_sFShaderFile;
 
@@ -246,12 +251,21 @@ void ShapeClass::Render (GLenum mode)
 	GLuint vUV = glGetAttribLocation( m_ShaderProgram, "vUV" );
 	GLuint vColor = glGetAttribLocation( m_ShaderProgram, "vColor" );
 	GLuint TextureID  = glGetUniformLocation(m_ShaderProgram, "TextureID");
+	GLuint vNormal = glGetAttribLocation( m_ShaderProgram, "vNormal" );
 
 	GLuint nTexture = glGetUniformLocation(m_ShaderProgram, "nTexture");
+	GLuint model = glGetUniformLocation(m_ShaderProgram, "model");
+	GLuint lightPos = glGetUniformLocation(m_ShaderProgram, "lPosition");
+	GLuint lightInt = glGetUniformLocation(m_ShaderProgram, "Light.intensities");
 	
 	// Final Projection of the Camera
 	glm::mat4 MVP = m_pCamera->calculateProjection(m_mModel);
 	glUniformMatrix4fv(MatrixID, 1, GL_FALSE, glm::value_ptr(MVP));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(m_mModel));
+
+	//Light
+	glUniform3fv(lightPos, 1, glm::value_ptr(m_pCamera->getPosition()));
+	glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(0.5f,0.5f,0.5f)));
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
@@ -274,6 +288,30 @@ void ShapeClass::Render (GLenum mode)
 	glEnableVertexAttribArray(vUV);
 	glBindBuffer(GL_ARRAY_BUFFER, m_UVBuffer);
 	glVertexAttribPointer( vUV, 2, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+
+	//Normal
+	glEnableVertexAttribArray(vNormal);
+	glBindBuffer(GL_ARRAY_BUFFER, m_NormalBuffer);
+	glVertexAttribPointer( vNormal, 3, GL_FLOAT, GL_FALSE, 0, (void*)0 );
+
+		//calculate normal in world coordinates
+	glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(m_mModel)));
+	glm::vec3 normal = glm::normalize(normalMatrix * glm::vec3(1.0f,0.0f,0.0f));
+
+	//calculate the location of this fragment (pixel) in world coordinates
+	glm::vec3 fragPosition = glm::vec3(m_mModel * glm::vec4(-8.754609f,-0.000000f,8.232207f,0.0f));
+	using namespace std;
+	cout << normal.x << " " << normal.y << " " << normal.z << endl;
+	cout << fragPosition.x << " " << fragPosition.y << " " << fragPosition.z << endl;
+
+	//calculate the vector from this pixels surface to the light source
+	glm::vec3 surfaceToLight = m_pCamera->getPosition() - fragPosition;
+	cout << surfaceToLight.x << " " << surfaceToLight.y << " " << surfaceToLight.z << endl;
+
+    //calculate the cosine of the angle of incidence (brightness)
+    float brightness = glm::dot(normal, surfaceToLight) / (glm::length(surfaceToLight) * glm::length(normal));
+	cout << brightness << endl;
+    //brightness = clamp(brightness, 0, 1);
 
 	//Color and draw
 	glDrawArrays(mode, 0, static_cast<int>(m_nVertices));

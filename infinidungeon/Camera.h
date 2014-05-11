@@ -11,6 +11,10 @@ public:
 	static Camera* getInstance(); // Singleton Accessor
 	void releaseInstance();	//Singleton Destructor
 
+	glm::vec3 getPosition() const {
+		return _position;
+	}
+
 	void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
 	
 	//Projection
