@@ -2,7 +2,7 @@
 #define PARTICLEGENERATOR_H
 
 #include "DisplayObject.h"
-#include <glfw3.h>
+//#include <glfw3.h>
 #include "Camera.h"
 
 struct Particle{
