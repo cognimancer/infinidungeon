@@ -27,6 +27,7 @@
     <ClCompile Include="MaterialManagerClass.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManagerClass.cpp" />
+    <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ShapeClass.cpp" />
     <ClCompile Include="SystemClass.cpp" />
     <ClCompile Include="TextureClass.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="MaterialManagerClass.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManagerClass.h" />
+    <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ShapeClass.h" />
     <ClInclude Include="SystemClass.h" />
     <ClInclude Include="TextureClass.h" />
