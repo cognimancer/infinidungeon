@@ -3,7 +3,6 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 --------------------------------------------------------------------------------------------------*/
 #ifndef _SHAPECLASS_H
 #define _SHAPECLASS_H
-#include "SystemClass.h"
 #include "Camera.h"
 #include "AngelShaderCompiler.h"
 #include "MaterialManagerClass.h"
@@ -29,10 +28,10 @@ protected:
 	String m_sName;
 
 	int m_nVertices; //Number of vertices in the shape
-	std::vector<vector3> m_vVertexPosition; //Vector of Vertices
-	std::vector<vector3> m_vVertexColor; //Vector of Colors
-	std::vector<vector3> m_vVertexNormal; //Vecotr of Normals
-	std::vector<vector2> m_vVertexUV; //vector of UVS
+	std::vector<glm::vec3> m_vVertexPosition; //Vector of Vertices
+	std::vector<glm::vec3> m_vVertexColor; //Vector of Colors
+	std::vector<glm::vec3> m_vVertexNormal; //Vecotr of Normals
+	std::vector<glm::vec2> m_vVertexUV; //vector of UVS
 	
 	Camera* m_pCamera; //Pointer to the singleton of CameraClass
 
@@ -76,19 +75,19 @@ public:
 	virtual void Render(GLenum mode = GL_TRIANGLE_FAN);
 
 	//Adds a new point to the vector of vertices
-	void AddVertexPosition(vector3 input);
+	void AddVertexPosition(glm::vec3 input);
 	void AddVertexPosition(const float x, const float y, const float z);
 
 	//Adds a new color to the vector of vertices
-	void AddVertexColor(vector3 input);
+	void AddVertexColor(glm::vec3 input);
 	void AddVertexColor(const float r, const float g, const float b);
 
 	//Adds a new normal to the vector of vertices
-	void AddVertexNormal(vector3 input);
+	void AddVertexNormal(glm::vec3 input);
 	void AddVertexNormal(const float x, const float y, const float z);
 
 	//Adds a new uv to the vector of vertices
-	void AddVertexUV(vector2 input);
+	void AddVertexUV(glm::vec2 input);
 	void AddVertexUV(const float u, const float v);
 
 	//Releases the vectors (leaving the OpenGL buffer initializated)

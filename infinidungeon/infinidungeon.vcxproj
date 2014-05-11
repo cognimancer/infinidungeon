@@ -29,7 +29,6 @@
     <ClCompile Include="ModelManagerClass.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
     <ClCompile Include="ShapeClass.cpp" />
-    <ClCompile Include="SystemClass.cpp" />
     <ClCompile Include="TextureClass.cpp" />
     <ClCompile Include="TextureManagerClass.cpp" />
     <ClCompile Include="TitleScreen.cpp" />
@@ -52,7 +51,6 @@
     <ClInclude Include="ModelManagerClass.h" />
     <ClInclude Include="ParticleGenerator.h" />
     <ClInclude Include="ShapeClass.h" />
-    <ClInclude Include="SystemClass.h" />
     <ClInclude Include="TextureClass.h" />
     <ClInclude Include="TextureManagerClass.h" />
     <ClInclude Include="TitleScreen.h" />
@@ -100,7 +98,7 @@
     <ExecutablePath>$(SolutionDir)include\GL\x86\bin;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir)include\GL\x86\include;$(IncludePath)</IncludePath>
     <ReferencePath>$(VCInstallDir)atlmfc\lib;$(VCInstallDir)lib</ReferencePath>
-    <LibraryPath>$(SolutionDir)include\GL\x86\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)include\GL\x86\lib;$(SolutionDir)include\SOIL;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)_delete\</OutDir>
@@ -126,10 +124,14 @@
     <PostBuildEvent>
       <Command>mkdir “$(SolutionDir)_binary\”
 mkdir “$(SolutionDir)_binary\shaders\”
+mkdir "$(SolutionDir)_binary\Data\"
+mkdir "$(SolutionDir)_binary\Data\MOBJ\"
+mkdir "$(SolutionDir)_binary\Data\Textures\"
 copy “$(OutDir)$(TargetName)$(TargetExt)” “$(SolutionDir)_binary”
 xcopy "$(SolutionDir)include\GL\x86\bin" "$(SolutionDir)_binary" /y
 xcopy "$(SolutionDir)$(SolutionName)\shaders" "$(SolutionDir)_binary\shaders" /y
-</Command>
+xcopy "$(SolutionDir)res\Models" "$(SolutionDir)_binary\Data\MOBJ" /y
+xcopy "$(SolutionDir)res\Textures" "$(SolutionDir)_binary\Data\Textures" /y</Command>
       <Message>Copying binary...</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>

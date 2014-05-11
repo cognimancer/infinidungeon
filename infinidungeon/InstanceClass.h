@@ -8,7 +8,6 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 
 class InstanceClass
 {
-	SystemClass* m_pSystem;
 	MaterialManagerClass* m_pMaterialManager;		
 
 	String m_sName; //Example Variable

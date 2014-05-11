@@ -9,8 +9,7 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 #include "MaterialManagerClass.h"
 
 class ModelClass
-{	
-	SystemClass* m_pSystem;
+{
 	MaterialManagerClass* m_pMaterialManager;
 	std::vector<ShapeClass> m_vShape;
 	String m_sModelName;

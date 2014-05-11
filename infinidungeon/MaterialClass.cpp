@@ -7,12 +7,10 @@ MaterialClass::~MaterialClass(void) { Release(); }
 	
 void MaterialClass::Release(void)
 {
-	m_pSystem = nullptr;
 	m_pTextureManager = nullptr;
 }
 void MaterialClass::Init(void)
 {
-	m_pSystem = SystemClass::GetInstance();
 	m_pTextureManager = TextureManagerClass::GetInstance();
 	m_nMapDiffuse = -1;
 	m_nMapNormal = -1;

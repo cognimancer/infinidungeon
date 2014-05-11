@@ -4,6 +4,8 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 #ifndef _TEXTUREMANAGERCLASS_H
 #define _TEXTUREMANAGERCLASS_H
 
+#include <vector>
+#include <assert.h>
 #include "TextureClass.h"
 
 class TextureManagerClass

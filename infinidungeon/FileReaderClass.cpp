@@ -9,10 +9,9 @@ void FileReaderClass::Release(void) { }
 void FileReaderClass::Init(void)
 {
 	m_pFile = nullptr;
-	m_pSystem = SystemClass::GetInstance();
 }
 
-Results FileReaderClass::ReadFile(String a_sFileName)
+Results FileReaderClass::ReadFile(std::string a_sFileName)
 {
 	if(m_pFile != nullptr)
 		CloseFile();
@@ -77,9 +76,9 @@ Results FileReaderClass::ReadNextLine(bool bSkipComments)
 				return ERROR_MEMORY;
 			}
 
-			//We cleanup the new string
+			//We cleanup the new std::string
 			strcpy_s(zsTemp, nNewBufferSize, zsLine);
-			//We delete the previous string
+			//We delete the previous std::string
 			delete[] zsLine;
 			//Copy Backedup data
 			zsLine = zsTemp;

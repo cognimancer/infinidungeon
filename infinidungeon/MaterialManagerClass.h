@@ -4,7 +4,6 @@
 #ifndef _MATERIALMANAGERCLASS_H
 #define _MATERIALMANAGERCLASS_H
 
-#include "SystemClass.h"
 #include "MaterialClass.h"
 
 //namespace BTO
@@ -12,7 +11,6 @@
 class MaterialManagerClass
 {
 public:
-	SystemClass* m_pSystem;
 	std::vector<MaterialClass*> m_vMaterial; //Materials Vector
 private:
 	MaterialManagerClass(void); // Constructor

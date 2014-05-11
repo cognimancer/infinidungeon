@@ -4,8 +4,8 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 #ifndef _EMPTYCLASS_H
 #define _EMPTYCLASS_H
 
-#include "SystemClass.h"
 #include "TextureManagerClass.h"
+#include "FileReaderClass.h"
 
 class MaterialClass
 {
@@ -15,7 +15,6 @@ class MaterialClass
 	String m_sMapDiffuse;
 	String m_sMapNormal;
 
-	SystemClass* m_pSystem;
 	TextureManagerClass* m_pTextureManager;
 public:
 	MaterialClass(String a_sName);

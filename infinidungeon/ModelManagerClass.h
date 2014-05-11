@@ -26,7 +26,7 @@ public:
 	int IdentifyModel(String a_sFileName);	//Returns the index of a model in the vector
 	int IdentifyInstance(String a_sName);	//Returns the index of an intance in the vector
 	void RenderModel(String a_sInstance = "All_Models"); //Renders the specified instance
-	void SetModelMatrix(matrix4 a_mMatrix, String a_sInstance = "All_Models"); //Modify the model matrix of the models
-	matrix4 GetModelMatrix(String a_sInstance); //Returns the model matrix for the specified model, the Identity if the model does not exist
+	void SetModelMatrix(glm::mat4 a_mMatrix, String a_sInstance = "All_Models"); //Modify the model matrix of the models
+	glm::mat4 GetModelMatrix(String a_sInstance); //Returns the model matrix for the specified model, the Identity if the model does not exist
 };
 #endif //_MODELMANAGERCLASS

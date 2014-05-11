@@ -10,12 +10,12 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_rotateLeft( false ),
 		_rotateUp( false ),
 		_rotateDown( false )
-		//_shape( new Cube() ),
 		{
 			_modelMan = ModelManagerClass::GetInstance();
-			_modelMan->LoadModel("Earth.obj", "Earth");
+			_modelMan->LoadModel("BasicRoomTex.obj", "BasicRoomTex");
 			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
+			_sprinting = false;
 }
 
 DungeonScreen::DungeonScreen( const DungeonScreen &other ) : AbstractScreen( other._view ),
@@ -40,10 +40,10 @@ void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
 	//_shape->render();
-	matrix4 matrix = _modelMan->GetModelMatrix("Earth");
+	glm::mat4 matrix = _modelMan->GetModelMatrix("BasicRoomTex");
 	//matrix = glm::translate(matrix, vector3(0.5f, 0.0f, 0.0f));
-	matrix = matrix4();
-	_modelMan->SetModelMatrix(matrix, "Earth");
+	matrix = glm::mat4();
+	_modelMan->SetModelMatrix(matrix, "BasicRoomTex");
 
 	_modelMan->RenderModel();
 	glutSwapBuffers();
@@ -58,6 +58,7 @@ void DungeonScreen::idle() {
 
 	glm::vec2 rotation;
 	glm::vec3 directions;
+	float timeframe = 1.0f;
 
 	if(_moveRight) directions.y = -1;
 	if(_moveLeft) directions.y = 1;
@@ -67,8 +68,9 @@ void DungeonScreen::idle() {
 	if(_rotateLeft) rotation.x = -0.02f;
 	if(_rotateUp) rotation.y = -0.02f;
 	if(_rotateDown) rotation.y = 0.02f;
+	if(_sprinting) timeframe = 3.0f;
 
-	Camera::getInstance()->move(directions, rotation, 1.0f);
+	Camera::getInstance()->move(directions, rotation, timeframe);
 
 	glutPostRedisplay();
 	initialTime = finalTime;
@@ -91,6 +93,9 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 	case 's':
 		_rotateDown = true;
 		break;
+	case 15: // shift
+		_sprinting = true;
+		break;
 	}
 } // keyboard
 
@@ -107,6 +112,9 @@ void DungeonScreen::keyboardUp( unsigned char key, int x, int y ) {
 		break;
 	case 's':
 		_rotateDown = false;
+		break;
+	case 15: //shift
+		_sprinting = false;
 		break;
 	}
 } // keyboardUp
@@ -125,6 +133,9 @@ void DungeonScreen::special( int key, int x, int y ) {
 	case GLUT_KEY_LEFT:
 		_moveLeft = true;
 		break;
+	case GLUT_KEY_SHIFT_L:
+		_sprinting = true;
+		break;
 	}
 } // special
 
@@ -141,6 +152,9 @@ void DungeonScreen::specialUp( int key, int x, int y ) {
 		break;
 	case GLUT_KEY_LEFT:
 		_moveLeft = false;
+		break;
+	case GLUT_KEY_SHIFT_L:
+		_sprinting = false;
 		break;
 	}
 } // specialUp

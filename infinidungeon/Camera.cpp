@@ -39,7 +39,7 @@ void Camera::setProjection( glm::mat4 a_mProjection ) {
 
 //View
 void Camera::setView() {
-	_position = glm::vec3( 0.0f, 0.0f, 5.0f );
+	_position = glm::vec3( 0.0f, 3.0f, 5.0f );
 	_orientation = glm::quat( glm::vec3( 0.0f, 0.0f, 0.0f ) );
 	m_mView = glm::lookAt(
 							glm::vec3( 0.0f, 0.0f, 5.0f ),
@@ -66,7 +66,7 @@ glm::mat4 Camera::getMVP() {
 // modified to eliminate y-axis movement with forward/backward
 void Camera::move(glm::vec3 directions, glm::vec2 rotations, float frametime)
 {
-	float _speed = 1.0f;
+	float _speed = .1f;
     auto pitch = glm::quat(glm::vec3(-rotations.y, 0, 0.f));
     auto yaw = glm::quat(glm::vec3(0, -rotations.x, 0.f));
 
