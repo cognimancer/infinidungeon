@@ -87,16 +87,16 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 		glutLeaveMainLoop();
 		break;
 	case 'a':
-		_rotateLeft = true;
+		_moveLeft = true;
 		break;
 	case 'd':
-		_rotateRight = true;
+		_moveRight = true;
 		break;
 	case 'w':
-		_rotateUp = true;
+		_moveForward = true;
 		break;
 	case 's':
-		_rotateDown = true;
+		_moveBackward = true;
 		break;
 	case 15: // shift
 		_sprinting = true;
@@ -107,16 +107,16 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 void DungeonScreen::keyboardUp( unsigned char key, int x, int y ) {
 	switch( key ) {
 	case 'a':
-		_rotateLeft = false;
+		_moveLeft = false;
 		break;
 	case 'd':
-		_rotateRight = false;
+		_moveRight = false;
 		break;
 	case 'w':
-		_rotateUp = false;
+		_moveForward = false;
 		break;
 	case 's':
-		_rotateDown = false;
+		_moveBackward = false;
 		break;
 	case 15: //shift
 		_sprinting = false;
@@ -127,16 +127,16 @@ void DungeonScreen::keyboardUp( unsigned char key, int x, int y ) {
 void DungeonScreen::special( int key, int x, int y ) {
 	switch( key ) {
 	case GLUT_KEY_UP:
-		_moveForward = true;
+		_rotateUp = true;
 		break;
 	case GLUT_KEY_DOWN:
-		_moveBackward = true;
+		_rotateDown = true;
 		break;
 	case GLUT_KEY_RIGHT:
-		_moveRight = true;
+		_rotateRight = true;
 		break;
 	case GLUT_KEY_LEFT:
-		_moveLeft = true;
+		_rotateLeft = true;
 		break;
 	case GLUT_KEY_SHIFT_L:
 		_sprinting = true;
@@ -147,16 +147,16 @@ void DungeonScreen::special( int key, int x, int y ) {
 void DungeonScreen::specialUp( int key, int x, int y ) {
 	switch( key ) {
 	case GLUT_KEY_UP:
-		_moveForward = false;
+		_rotateUp = false;
 		break;
 	case GLUT_KEY_DOWN:
-		_moveBackward = false;
+		_rotateDown = false;
 		break;
 	case GLUT_KEY_RIGHT:
-		_moveRight = false;
+		_rotateRight = false;
 		break;
 	case GLUT_KEY_LEFT:
-		_moveLeft = false;
+		_rotateLeft = false;
 		break;
 	case GLUT_KEY_SHIFT_L:
 		_sprinting = false;
