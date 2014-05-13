@@ -34,6 +34,7 @@ protected:
 	std::vector<glm::vec2> m_vVertexUV; //vector of UVS
 	
 	Camera* m_pCamera; //Pointer to the singleton of CameraClass
+	float prevIntensity;
 
 	bool m_bGPUInitialized; //Indicate if memory has been reserved for GPU variables
 

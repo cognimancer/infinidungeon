@@ -31,7 +31,7 @@ void Camera::init() {
 
 //Projection
 void Camera::setProjection() {
-	m_mProjection = glm::perspective( 45.0f, 4.0f / 3.0f, 0.1f, 500.0f );
+	m_mProjection = glm::perspective( 60.0f, 16.0f / 9.0f, 0.1f, 500.0f );
 }
 
 void Camera::setProjection( glm::mat4 a_mProjection ) {
