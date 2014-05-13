@@ -87,15 +87,19 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 		glutLeaveMainLoop();
 		break;
 	case 'a':
+	case 'A':
 		_moveLeft = true;
 		break;
 	case 'd':
+	case 'D':
 		_moveRight = true;
 		break;
 	case 'w':
+	case 'W':
 		_moveForward = true;
 		break;
 	case 's':
+	case 'S':
 		_moveBackward = true;
 		break;
 	case 15: // shift
@@ -107,15 +111,19 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 void DungeonScreen::keyboardUp( unsigned char key, int x, int y ) {
 	switch( key ) {
 	case 'a':
+	case 'A':
 		_moveLeft = false;
 		break;
 	case 'd':
+	case 'D':
 		_moveRight = false;
 		break;
 	case 'w':
+	case 'W':
 		_moveForward = false;
 		break;
 	case 's':
+	case 'S':
 		_moveBackward = false;
 		break;
 	case 15: //shift

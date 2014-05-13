@@ -24,6 +24,8 @@ void ShapeClass::Init(void)
 	m_pCamera = Camera::getInstance();
 
 	m_nMaterialIndex = -1;
+
+	prevIntensity = 1;
 }
 ShapeClass::ShapeClass() { Init(); }
 ShapeClass::ShapeClass(const ShapeClass& other)
@@ -265,6 +267,9 @@ void ShapeClass::Render (GLenum mode)
 
 	//Light
 	glUniform3fv(lightPos, 1, glm::value_ptr(m_pCamera->getPosition()));
+	float intensity = std::max(1.0f, std::min(prevIntensity + ((rand() % 10)/100.0f - .05f), 2.0f));
+	prevIntensity = intensity;
+	//glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(intensity, intensity - .15, intensity - .15)));
 	glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(1.0f)));
 	glUniform1f(lightFact, 100.0f);
 

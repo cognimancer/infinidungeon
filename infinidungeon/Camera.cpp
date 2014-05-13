@@ -31,7 +31,7 @@ void Camera::init() {
 
 //Projection
 void Camera::setProjection() {
-	m_mProjection = glm::perspective( 45.0f, 4.0f / 3.0f, 0.1f, 500.0f );
+	m_mProjection = glm::perspective( 60.0f, 16.0f / 9.0f, 0.1f, 500.0f );
 }
 
 void Camera::setProjection( glm::mat4 a_mProjection ) {
@@ -87,6 +87,9 @@ void Camera::move( glm::vec3 directions, glm::vec2 rotations, float frametime ) 
     _position += directions[1] * camera_pitch_direction * frametime * _speed;
     // up and down flying - only y-axis could be affected
     _position.y += directions[2] * frametime * _speed;
+	// restrict camera to room dimensions
+	_position.x = glm::clamp(_position.x, -22.0f, 22.0f);
+	_position.z = glm::clamp(_position.z, -21.0f, 21.0f);
 
     m_mView = glm::lookAt(_position, _position + camera_roll_direction,
                         glm::cross(camera_roll_direction, camera_pitch_direction));

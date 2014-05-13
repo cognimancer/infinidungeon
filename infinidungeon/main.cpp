@@ -15,7 +15,7 @@ int main( int argc, char **argv ) {
 //	glutInitContextProfile( GLUT_CORE_PROFILE );
 	glutInitDisplayMode( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH );
 	glutSetOption( GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION );
-	glutInitWindowSize( 640, 480 );
+	glutInitWindowSize( 1600, 900 );
 	glutInitWindowPosition( 0, 0 );
 	glutCreateWindow( "infinidungeon" );
 	glClearColor( 0.0, 0.0, 0.0, 1.0 );
