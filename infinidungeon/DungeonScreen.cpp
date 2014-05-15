@@ -15,7 +15,12 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_sprinting( false )
 		{
 			_modelMan = ModelManagerClass::GetInstance();
-			_modelMan->LoadModel("BasicRoomTex.obj", "BasicRoomTex");
+			//_modelMan->LoadModel("Room1.obj", "Room1");
+			//_modelMan->LoadModel("Room1.obj", "Room2");
+			_currentRoom = new Room( "room1" );
+			_currentRoom->north = new Room( "room2" );
+			_currentRoom->north->setPosition( 0, -1 );
+			_currentRoom->north->setRotation( 180.0f );
 			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 }
@@ -36,18 +41,20 @@ DungeonScreen &DungeonScreen::operator=( const DungeonScreen &other ) {
 
 DungeonScreen::~DungeonScreen() {
 	delete _modelMan;
+	delete _currentRoom->north;
+	delete _currentRoom;
 }
 
 void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
-	//_shape->render();
-	glm::mat4 matrix = _modelMan->GetModelMatrix("BasicRoomTex");
-	//matrix = glm::translate(matrix, vector3(0.5f, 0.0f, 0.0f));
-	matrix = glm::mat4();
-	_modelMan->SetModelMatrix(matrix, "BasicRoomTex");
-
-	_modelMan->RenderModel();
+	glm::mat4 matrix = glm::translate( glm::mat4(), glm::vec3( 0.0f, 0.0f, -57.0f ) );
+	matrix = glm::rotate(matrix, 180.0f, glm::vec3( 0.0f, 1.0f, 0.0f ) );
+//	_modelMan->SetModelMatrix(glm::mat4(), "Room1");
+//	_modelMan->SetModelMatrix(matrix, "Room2");
+	_currentRoom->render();
+	_currentRoom->north->render();
+//	_modelMan->RenderModel();
 	glutSwapBuffers();
 } // display
 

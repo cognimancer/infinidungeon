@@ -2,9 +2,9 @@
 #define DUNGEONSCREEN_H
 
 #include "AbstractScreen.h"
-#include "Cube.h"
 #include "ModelClass.h"
 #include "ModelManagerClass.h"
+#include "Room.h"
 
 class DungeonScreen : public AbstractScreen {
 private:
@@ -22,6 +22,7 @@ private:
 	float _lookLeftRight;
 	bool _sprinting;
 	ModelManagerClass* _modelMan;
+	Room* _currentRoom;
 
 public:
 	DungeonScreen( View *view );

@@ -28,6 +28,7 @@
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="ModelManagerClass.cpp" />
     <ClCompile Include="ParticleGenerator.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="ShapeClass.cpp" />
     <ClCompile Include="TextureClass.cpp" />
     <ClCompile Include="TextureManagerClass.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="AngelShaderCompiler.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DisplayObject.h" />
+    <ClInclude Include="Dungeon.h" />
     <ClInclude Include="DungeonScreen.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="FileReaderClass.h" />
@@ -50,6 +52,7 @@
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="ModelManagerClass.h" />
     <ClInclude Include="ParticleGenerator.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="ShapeClass.h" />
     <ClInclude Include="TextureClass.h" />
     <ClInclude Include="TextureManagerClass.h" />
