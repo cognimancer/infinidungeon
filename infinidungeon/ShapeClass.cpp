@@ -271,7 +271,7 @@ void ShapeClass::Render (GLenum mode)
 	prevIntensity = intensity;
 	//glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(intensity, intensity - .15, intensity - .15)));
 	glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(1.0f)));
-	glUniform1f(lightFact, 100.0f);
+	glUniform1f(lightFact, m_pCamera->brightness);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);

@@ -18,6 +18,7 @@
     <ClCompile Include="AngelShaderCompiler.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DisplayObject.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="DungeonScreen.cpp" />
     <ClCompile Include="FileReaderClass.cpp" />
     <ClCompile Include="FolderClass.cpp" />

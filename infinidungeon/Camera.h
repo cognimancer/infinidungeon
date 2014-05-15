@@ -14,6 +14,9 @@ public:
 	glm::vec3 getPosition() const {
 		return _position;
 	}
+	
+	//Visibility / Light Brightness
+	float brightness;
 
 	void setSpeed( float speed );
 	void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
