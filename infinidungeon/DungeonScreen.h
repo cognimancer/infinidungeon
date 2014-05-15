@@ -4,7 +4,7 @@
 #include "AbstractScreen.h"
 #include "ModelClass.h"
 #include "ModelManagerClass.h"
-#include "Room.h"
+#include "Dungeon.h"
 
 class DungeonScreen : public AbstractScreen {
 private:
@@ -22,7 +22,7 @@ private:
 	float _lookLeftRight;
 	bool _sprinting;
 	ModelManagerClass* _modelMan;
-	Room* _currentRoom;
+	Dungeon* _dungeon;
 
 public:
 	DungeonScreen( View *view );

@@ -14,13 +14,8 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_lookLeftRight( 0.0f ),
 		_sprinting( false )
 		{
+			_dungeon = new Dungeon();
 			_modelMan = ModelManagerClass::GetInstance();
-			//_modelMan->LoadModel("Room1.obj", "Room1");
-			//_modelMan->LoadModel("Room1.obj", "Room2");
-			_currentRoom = new Room( "room1" );
-			_currentRoom->north = new Room( "room2" );
-			_currentRoom->north->setPosition( 0, -1 );
-			_currentRoom->north->setRotation( 180.0f );
 			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 }
@@ -41,29 +36,19 @@ DungeonScreen &DungeonScreen::operator=( const DungeonScreen &other ) {
 
 DungeonScreen::~DungeonScreen() {
 	delete _modelMan;
-	delete _currentRoom->north;
-	delete _currentRoom;
+	delete _dungeon;
 }
 
 void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
-	glm::mat4 matrix = glm::translate( glm::mat4(), glm::vec3( 0.0f, 0.0f, -57.0f ) );
-	matrix = glm::rotate(matrix, 180.0f, glm::vec3( 0.0f, 1.0f, 0.0f ) );
-//	_modelMan->SetModelMatrix(glm::mat4(), "Room1");
-//	_modelMan->SetModelMatrix(matrix, "Room2");
-	_currentRoom->render();
-	_currentRoom->north->render();
-//	_modelMan->RenderModel();
+	_dungeon->renderRoom( 0, 0 ); //TODO get current room/position from Player
 	glutSwapBuffers();
 } // display
 
 void DungeonScreen::idle() {
 	finalTime = (float)glutGet( GLUT_ELAPSED_TIME );
 	float dt = (finalTime - initialTime)/500;
-
-	//std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
-	//std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
 
 	Camera::getInstance()->setSpeed( _sprinting ? 9.0f : 3.0f );
 	glm::vec2 rotation = glm::vec2(0.0f);
@@ -175,6 +160,12 @@ void DungeonScreen::specialUp( int key, int x, int y ) {
 		break;
 	case GLUT_KEY_SHIFT_L:
 		_sprinting = false;
+		break;
+	case GLUT_KEY_PAGE_UP:
+		Camera::getInstance()->brightness += 20.0f;
+		break;
+	case GLUT_KEY_PAGE_DOWN:
+		Camera::getInstance()->brightness -= 20.0f;
 		break;
 	}
 } // specialUp

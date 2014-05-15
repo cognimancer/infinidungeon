@@ -1,8 +1,9 @@
 #include "Room.h"
 
-Room::Room( std::string name ) : _name( name ), _rotation( 0.0f ), _x( 0 ), _y( 0 ),
+Room::Room( std::string name, int row, int col, float rotation ) : _name( name ), _rotation( rotation ), _row( row ), _col( col ),
 		north( nullptr ), east( nullptr ), south( nullptr ), west( nullptr ) {
 	ModelManagerClass::GetInstance()->LoadModel( "Room1.obj", name );
+	setModelMatrix();
 }
 
 void Room::render() {
@@ -14,14 +15,14 @@ void Room::setRotation( float deg ) {
 	setModelMatrix();
 }
 
-void Room::setPosition( int x, int y ) {
-	_x = x;
-	_y = y;
+void Room::setPosition( int row, int col ) {
+	_row = row;
+	_col = col;
 	setModelMatrix();
 }
 
 void Room::setModelMatrix() {
-	glm::mat4 matrix = glm::translate( glm::mat4(), glm::vec3( roomWidth()*_x, 0.0f, roomWidth()*_y ) );
+	glm::mat4 matrix = glm::translate( glm::mat4(), glm::vec3( roomWidth()*_col, 0.0f, roomWidth()*_row ) );
 	matrix = glm::rotate(matrix, _rotation, glm::vec3( 0.0f, 1.0f, 0.0f ) );
 	ModelManagerClass::GetInstance()->SetModelMatrix( matrix, _name );
 }

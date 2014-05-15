@@ -11,16 +11,16 @@ public:
 	Room *south;
 	Room *west;
 
-	Room( std::string name );
+	Room( std::string name, int row = 0, int col = 0, float rotation = 0.0f );
 	void render();
 	void setRotation( float deg = 0.0f );
-	void setPosition( int x = 0, int y = 0 );
+	void setPosition( int row = 0, int col = 0 );
 
 private:
 	std::string _name;
 	float _rotation;
-	int _x;
-	int _y;
+	int _row;
+	int _col;
 
 	void setModelMatrix();
 };
