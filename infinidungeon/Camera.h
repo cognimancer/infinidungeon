@@ -11,16 +11,17 @@ public:
 	static Camera* getInstance(); // Singleton Accessor
 	void releaseInstance();	//Singleton Destructor
 
-	glm::vec3 getPosition() const {
+	/*glm::vec3 getPosition() const {
 		return _position;
-	}
+	}*/
 	
 	//Visibility / Light Brightness
 	float brightness;
 
-	void setSpeed( float speed );
-	void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
+	//void move(glm::vec3 directions, glm::vec2 rotations, float frametime);
 	
+	void move(glm::vec3 currentPosition);
+
 	//Projection
 	void setProjection();
 	void setProjection( glm::mat4 a_mProjection );
@@ -35,6 +36,9 @@ public:
 	glm::mat4 calculateProjection( glm::mat4 a_mModel = glm::mat4( 1.0f ) );
 	glm::mat4 getMVP();
 	__declspec( property( get = getMVP ) ) glm::mat4 VMP;
+
+	//Orientation helper function
+	glm::quat Camera::getOrientation( glm::vec2 rotations);
 
 private:
 	Camera( void ); // Constructor
@@ -56,11 +60,9 @@ private:
 	glm::mat4 m_mMVP;
 
 	//Position
-	glm::vec3 _position;
+	//glm::vec3 _position;
 	//Orientation
 	glm::quat _orientation;
-	//Speed
-	float _speed;
 };
 
 

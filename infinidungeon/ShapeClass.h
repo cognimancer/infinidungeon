@@ -3,10 +3,11 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 --------------------------------------------------------------------------------------------------*/
 #ifndef _SHAPECLASS_H
 #define _SHAPECLASS_H
-#include "Camera.h"
+
 #include "AngelShaderCompiler.h"
 #include "MaterialManagerClass.h"
-
+#include "Camera.h"
+#include "Player.h"
 class ShapeClass
 {
 public:
@@ -34,6 +35,7 @@ protected:
 	std::vector<glm::vec2> m_vVertexUV; //vector of UVS
 	
 	Camera* m_pCamera; //Pointer to the singleton of CameraClass
+
 	float prevIntensity;
 
 	bool m_bGPUInitialized; //Indicate if memory has been reserved for GPU variables

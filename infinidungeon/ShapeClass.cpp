@@ -266,7 +266,8 @@ void ShapeClass::Render (GLenum mode)
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(m_mModel));
 
 	//Light
-	glUniform3fv(lightPos, 1, glm::value_ptr(m_pCamera->getPosition()));
+	//glUniform3fv(lightPos, 1, glm::value_ptr(m_pCamera->getPosition()));
+	glUniform3fv(lightPos, 1, glm::value_ptr(Player::getInstance()->getPosition()));
 	float intensity = std::max(1.0f, std::min(prevIntensity + ((rand() % 10)/100.0f - .05f), 2.0f));
 	prevIntensity = intensity;
 	//glUniform3fv(lightInt, 1, glm::value_ptr(glm::vec3(intensity, intensity - .15, intensity - .15)));

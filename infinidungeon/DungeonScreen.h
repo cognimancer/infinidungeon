@@ -5,6 +5,7 @@
 #include "ModelClass.h"
 #include "ModelManagerClass.h"
 #include "Dungeon.h"
+#include "Player.h"
 
 class DungeonScreen : public AbstractScreen {
 private:
