@@ -1,11 +1,6 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-
-#include <glm\glm.hpp>
-#include <glm\gtc\matrix_transform.hpp>
-#include <glm\gtc\type_ptr.hpp>
-#include <glm\gtx\transform.hpp>
 #include "Camera.h"
 #include "Room.h"
 class Player
@@ -23,7 +18,7 @@ public:
 	void setSpeed( float speed );
 
 	
-	void move(glm::vec3 directions, glm::vec2 rotations,float frametime);
+	void move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting = false);
 
 private:
 	Player(void);
@@ -34,6 +29,8 @@ private:
 	static Player* m_pInstance;//Singleton
 	//Position
 	glm::vec3 _position;
+	//Orientation
+	glm::quat _orientation;
 
 	void init();
 

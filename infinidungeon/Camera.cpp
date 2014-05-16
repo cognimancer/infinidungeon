@@ -64,39 +64,14 @@ glm::mat4 Camera::getMVP() {
 	return m_mMVP;
 }
 
-/*
-void Camera::setSpeed( float speed ) {
-	_speed = speed;
-}
-*/
-
-// http://stackoverflow.com/questions/19738805/opengl-camera-control-with-arrow-keys
-// modified to eliminate y-axis movement with forward/backward
-//void Camera::move( glm::vec3 directions, glm::vec2 rotations, float frametime ) 
-void Camera::move(glm::vec3 currentPosition)
-{
-	
-
+//void Camera::move( glm::vec3 directions, glm::vec2 rotations, float frametime ) {
+void Camera::move(glm::vec3 currentPosition, glm::quat currentOrientation) {
+	// any alterations would go here (i.e. third-person view)
+	// since we're using first-person, it's a direct correllation
+	_position = currentPosition;
+	_orientation = currentOrientation;
     auto camera_roll_direction = _orientation * glm::vec3(0, 0, -1);
     auto camera_pitch_direction = _orientation * glm::vec3(-1, 0, 0);
-	//auto tmp = _orientation * glm::vec3( 0, 0, -1 );
-	//tmp.y = 0;
-	//tmp = glm::normalize( tmp );
-	
-
-
-
     m_mView = glm::lookAt(currentPosition, currentPosition + camera_roll_direction,
                         glm::cross(camera_roll_direction, camera_pitch_direction));
-	
-}
-
-glm::quat Camera::getOrientation( glm::vec2 rotations)
-{
-	auto pitch = glm::quat(glm::vec3(-rotations.y, 0, 0.f));
-    auto yaw = glm::quat(glm::vec3(0, -rotations.x, 0.f));
-
-    _orientation = glm::normalize(yaw * _orientation * pitch);
-
-	return _orientation;
 }

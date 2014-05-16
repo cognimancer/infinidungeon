@@ -7,7 +7,6 @@ Created by Alberto Bobadilla (labigm@rit.edu) in 2013
 #include "AngelShaderCompiler.h"
 #include "MaterialManagerClass.h"
 #include "Camera.h"
-#include "Player.h"
 class ShapeClass
 {
 public:

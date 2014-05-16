@@ -50,8 +50,6 @@ void DungeonScreen::idle() {
 	finalTime = (float)glutGet( GLUT_ELAPSED_TIME );
 	float dt = (finalTime - initialTime)/500;
 
-	//Camera::getInstance()->setSpeed( _sprinting ? 9.0f : 3.0f );
-	Player::getInstance()->setSpeed( _sprinting ? 9.0f : 3.0f );
 	glm::vec2 rotation = glm::vec2(0.0f);
 	glm::vec3 directions = glm::vec3(0.0f);
 
@@ -68,8 +66,7 @@ void DungeonScreen::idle() {
 	if(_lookLeftRight || _lookUpDown ) 
 		glutWarpPointer( 320, 240 );
 
-	//Camera::getInstance()->move(directions, rotation, dt);
-	Player::getInstance()->move(directions, rotation, dt);
+	Player::getInstance()->move(directions, rotation, dt, _sprinting);
 	glutPostRedisplay();
 	initialTime = finalTime;
 } // idle
@@ -97,6 +94,10 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 		break;
 	case 15: // shift
 		_sprinting = true;
+		break;
+	case 'f':
+	case 'F':
+		glutFullScreenToggle();
 		break;
 	}
 } // keyboard
