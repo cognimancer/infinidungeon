@@ -2,7 +2,7 @@
 
 Room::Room( std::string name, int row, int col, float rotation ) : _name( name ), _rotation( rotation ), _row( row ), _col( col ),
 		north( nullptr ), east( nullptr ), south( nullptr ), west( nullptr ) {
-	ModelManagerClass::GetInstance()->LoadModel( "Room1.obj", name );
+	ModelManagerClass::GetInstance()->LoadModel( "Room2.obj", name );
 	setModelMatrix();
 }
 
