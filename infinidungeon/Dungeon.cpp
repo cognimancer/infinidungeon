@@ -25,7 +25,7 @@ Room* Dungeon::getRoom(int row, int col) {
 
 	return _map[row][col];
 }
-
+/*
 void Dungeon::renderRoom( int row, int col ) {
 	map2d::const_iterator checkRow = _map.find( row );
 	map2d::const_iterator checkRowNorth = _map.find( row - 1 );
@@ -63,4 +63,4 @@ void Dungeon::renderRoom( int row, int col ) {
 	_map[row + 1][col]->render();	// south neighbor
 	_map[row][col - 1]->render();	// west neighbor
 	_map[row][col + 1]->render();	// east neighbor
-}
+}*/

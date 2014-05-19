@@ -10,10 +10,10 @@ Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _
 	
 	//set initial available exits for this roomtype
 	//these are temporary; true exits will be modified by rotation
-	boolean n = false;
-	boolean s = false;
-	boolean e = false;
-	boolean w = false;
+	bool n = false;
+	bool s = false;
+	bool e = false;
+	bool w = false;
 	switch(roomType) {
 	case ROOM_DEADEND: n = true; break;
 	case ROOM_ELBOW: n = true; w = true; break;

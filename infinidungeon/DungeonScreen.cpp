@@ -15,6 +15,7 @@ DungeonScreen::DungeonScreen( View *view ) : AbstractScreen( view ),
 		_sprinting( false )
 		{
 			_dungeon = new Dungeon();
+			Player::getInstance()->setCurrentRoom(_dungeon->getRoom(0,0));
 			_modelMan = ModelManagerClass::GetInstance();
 			std::cout << "Models: " << _modelMan->GetNumberOfModels() << std::endl;
 			std::cout << "Instances: " << _modelMan->GetNumberOfInstances() << std::endl;
