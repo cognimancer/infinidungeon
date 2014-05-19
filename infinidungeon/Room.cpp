@@ -78,3 +78,13 @@ void Room::setModelMatrix() {
 	matrix = glm::rotate(matrix, _rotation, glm::vec3( 0.0f, 1.0f, 0.0f ) );
 	ModelManagerClass::GetInstance()->SetModelMatrix( matrix, _name );
 }
+
+int Room::getColumn()
+{
+	return _col;
+}
+
+int Room::getRow()
+{
+	return _row;
+}

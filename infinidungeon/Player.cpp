@@ -83,3 +83,33 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	
 	Camera::getInstance()->move(_position, _orientation);
 }
+
+Room* Player::checkRoom()
+{
+	double roomRadius = (currentRoom->roomWidth()/2);
+	glm::vec3 currentRoomCenter = glm::vec3(
+		(currentRoom->getColumn() * currentRoom->roomWidth()) - roomRadius,
+		0,
+		(currentRoom->getRow() * currentRoom->roomWidth()) - roomRadius);
+	double distance = sqrt(((currentRoomCenter.x - _position.x)*(currentRoomCenter.x - _position.x))+((currentRoomCenter.z - _position.z)*(currentRoomCenter.z - _position.z)));
+	if (distance > roomRadius)
+	{
+		if(_position.x-currentRoomCenter.x > roomRadius)
+		{//east
+			return currentRoom = currentRoom->east;
+		}
+		else if (_position.x-currentRoomCenter.x < roomRadius)
+		{//west
+			return currentRoom = currentRoom->west;
+		}
+		else if (_position.z-currentRoomCenter.z > roomRadius)
+		{//north
+			return currentRoom = currentRoom->north;
+		}
+		else if (_position.z-currentRoomCenter.z < roomRadius)
+		{//south
+			return currentRoom = currentRoom->south;
+		}
+	}
+	return currentRoom;
+}
