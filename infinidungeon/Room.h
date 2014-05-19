@@ -16,10 +16,10 @@ public:
 	Room *east;
 	Room *south;
 	Room *west;
-	boolean exitNorth;
-	boolean exitEast;
-	boolean exitSouth;
-	boolean exitWest;
+	bool exitNorth;
+	bool exitEast;
+	bool exitSouth;
+	bool exitWest;
 
 	//room rotations are clockwise
 	Room( std::string name, int row = 0, int col = 0, int roomType = 1, int rotation = 0 );

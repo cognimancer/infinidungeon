@@ -1,5 +1,8 @@
 #include "Player.h"
 
+float groundLevel = 3.0f;
+float gravity = 0.04f;
+float zVelocity = 0.0f;
 
 #pragma region Instance
 Player *Player::m_pInstance = nullptr;
@@ -31,7 +34,7 @@ Player& Player::operator=( Player const& other ) { return *this; }
 
 void Player::init(){
 	//m_pCamera = Camera::getInstance();
-	_position = glm::vec3( 0.0f, 3.0f, 5.0f );
+	_position = glm::vec3( 0.0f, groundLevel, 0.0f );
 	_orientation = glm::quat( glm::vec3( 0.0f, 0.0f, 0.0f ) );
 	_speed = 3.0f;
 };
@@ -42,7 +45,7 @@ void Player::setSpeed( float speed ) {
 
 // http://stackoverflow.com/questions/19738805/opengl-camera-control-with-arrow-keys
 // modified to eliminate y-axis movement with forward/backward
-void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting) {
+void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting, bool jump) {
 
 	// calculate orientation
 	auto pitch = glm::quat(glm::vec3(-rotations.y, 0, 0.f));
@@ -56,14 +59,23 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	tmp = glm::normalize( tmp );
 
 	float delta = _speed * (sprinting ? 3.0f : 1.0f);
+	// jumping
+	//if (_position.y == groundLevel && jump) _position.y = 10;
+	if (_position.y == groundLevel && jump) zVelocity += .4;
+	// gravity
+	//if (_position.y > groundLevel) _position.y -= gravity;
+	if (_position.y > groundLevel) zVelocity -= gravity;
 
 	// forward/backward move - only xz could be affected
     _position += directions[0] * tmp * frametime * delta;
     // left and right strafe - only xz could be affected    
     _position += directions[1] * camera_pitch_direction * frametime * delta;
     // up and down flying - only y-axis could be affected
-    _position.y += directions[2] * frametime * delta;
-
+    _position.y += zVelocity;//directions[2] * frametime * delta;
+	if (_position.y < groundLevel) {
+		_position.y = groundLevel;
+		zVelocity = 0;
+	}
 	// restrict camera to room dimensions
 	//FIXME temp disabled to demo moving between rooms - should be moved to Player or Room
 	//	_position.x = glm::clamp(_position.x, -22.0f, 22.0f);

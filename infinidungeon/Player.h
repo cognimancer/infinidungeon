@@ -18,7 +18,7 @@ public:
 	void setSpeed( float speed );
 
 	
-	void move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting = false);
+	void move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting = false, bool jump = false);
 
 private:
 	Player(void);

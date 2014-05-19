@@ -22,6 +22,7 @@ private:
 	float _lookUpDown;
 	float _lookLeftRight;
 	bool _sprinting;
+	bool _jumping;
 	ModelManagerClass* _modelMan;
 	Dungeon* _dungeon;
 

@@ -65,8 +65,10 @@ void DungeonScreen::idle() {
 	if(_lookUpDown != 0.0f) rotation.y += _lookUpDown;
 	if(_lookLeftRight || _lookUpDown ) 
 		glutWarpPointer( 320, 240 );
+	//if(_jumping) directions.z += 5.0f;
 
-	Player::getInstance()->move(directions, rotation, dt, _sprinting);
+	Player::getInstance()->move(directions, rotation, dt, _sprinting, _jumping);
+	_jumping = false;
 	glutPostRedisplay();
 	initialTime = finalTime;
 } // idle
@@ -94,6 +96,9 @@ void DungeonScreen::keyboard( unsigned char key, int x, int y ) {
 		break;
 	case 15: // shift
 		_sprinting = true;
+		break;
+	case ' ': //jump
+		_jumping = true;
 		break;
 	case 'f':
 	case 'F':
