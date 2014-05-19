@@ -5,7 +5,7 @@
 
 class Room {
 public:
-	static float roomWidth() { return 58.0f; }
+	static float roomWidth() { return 57.4f; }
 	Room *north;
 	Room *east;
 	Room *south;
