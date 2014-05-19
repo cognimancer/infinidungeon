@@ -84,7 +84,12 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	Camera::getInstance()->move(_position, _orientation);
 }
 
-Room* Player::checkRoom()
+void Player::setCurrentRoom(Room* givenRoom)
+{
+	currentRoom = givenRoom;
+}
+
+Room* Player::getCurrentRoom()
 {
 	double roomRadius = (currentRoom->roomWidth()/2);
 	glm::vec3 currentRoomCenter = glm::vec3(
@@ -113,3 +118,4 @@ Room* Player::checkRoom()
 	}
 	return currentRoom;
 }
+

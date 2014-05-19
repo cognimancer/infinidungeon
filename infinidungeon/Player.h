@@ -8,19 +8,22 @@ class Player
 public:
 	static Player* getInstance(); // Singleton Accessor
 	void releaseInstance();	//Singleton Destructor
-	
-	Room* currentRoom;
+
+	void setCurrentRoom(Room* givenRoom);
+	Room* getCurrentRoom();
 
 	glm::vec3 getPosition() const {
 		return _position;
 	}
 
 	void setSpeed( float speed );
-	Room* checkRoom();
+	
 	
 	void move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting = false, bool jump = false);
 
 private:
+		
+	Room* currentRoom;
 	Player(void);
 	~Player(void);
 	Player( Player const& other); //Copy Constructor
