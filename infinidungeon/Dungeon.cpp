@@ -2,7 +2,8 @@
 #include "Dungeon.h"
 
 Dungeon::Dungeon() : _roomCount( 0 ), _map( map2d() ) {
-	//startRoom = new Room("startRoom", 0, 0, Room::ROOM_DEADEND);
+	_map[0] = std::unordered_map<int, Room*>();
+	_map[0][0] = new Room("startRoom", 0, 0, Room::ROOM_DEADEND);
 }
 
 Dungeon::~Dungeon() {

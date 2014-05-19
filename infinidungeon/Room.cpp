@@ -1,4 +1,5 @@
 #include "Room.h"
+#include "Dungeon.h"
 
 Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _name( name ), _rotation( rotation ), _row( row ), _col( col ),
 		north( nullptr ), east( nullptr ), south( nullptr ), west( nullptr ),
@@ -56,6 +57,9 @@ Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _
 
 void Room::render() {
 	ModelManagerClass::GetInstance()->RenderModel( _name );
+	if (exitNorth) {
+
+	}
 }
 
 void Room::setRotation( float deg ) {
