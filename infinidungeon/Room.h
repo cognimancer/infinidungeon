@@ -2,6 +2,8 @@
 #define ROOM_H
 #include <string>
 #include "ModelManagerClass.h"
+class Room; //avoid circular dependency
+#include "Dungeon.h"
 
 class Room {
 public:
