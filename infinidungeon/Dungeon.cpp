@@ -29,19 +29,19 @@ void Dungeon::renderRoom( int row, int col ) {
 	}
 	// all three rows exist at this point
 	if( _map[row].find( col ) == _map[row].end() ) {
-		_map[row][col] = new Room( "room" + _rmID++, row, col );
+		_map[row][col] = new Room( "room" + _rmID++, row, col, Room::ROOM_CROSSROADS );
 	}
 	if( _map[row - 1].find( col ) == _map[row - 1].end() ) {
-		_map[row - 1][col] = new Room( "room" + _rmID++, row - 1, col, 180.0f ); //FIXME temp hard-coded rotation to demo two connected rooms
+		_map[row - 1][col] = new Room( "room" + _rmID++, row - 1, col, Room::ROOM_DEADEND, 180 ); //FIXME temp hard-coded rotation to demo two connected rooms
 	}
 	if( _map[row + 1].find( col ) == _map[row + 1].end() ) {
-		_map[row + 1][col] = new Room( "room" + _rmID++, row + 1, col );
+		_map[row + 1][col] = new Room( "room" + _rmID++, row + 1, col, Room::ROOM_ELBOW );
 	}
 	if( _map[row].find( col - 1 ) == _map[row].end() ) {
-		_map[row][col - 1] = new Room( "room" + _rmID++, row, col - 1 );
+		_map[row][col - 1] = new Room( "room" + _rmID++, row, col - 1, Room::ROOM_HALL, 90 );
 	}
 	if( _map[row].find( col + 1 ) == _map[row].end() ) {
-		_map[row][col + 1] = new Room( "room" + _rmID++, row, col + 1 );
+		_map[row][col + 1] = new Room( "room" + _rmID++, row, col + 1, Room::ROOM_T_JOINT );
 	}
 	//TODO rooms need to have appropriate doorways
 	//TODO rooms only need to be rendered if there's a doorway to them.
