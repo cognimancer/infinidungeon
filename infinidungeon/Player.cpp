@@ -34,7 +34,7 @@ Player& Player::operator=( Player const& other ) { return *this; }
 
 void Player::init(){
 	//m_pCamera = Camera::getInstance();
-	_position = glm::vec3( 0.0f, groundLevel, 0.0f );
+	_position = glm::vec3( 0.0f, 100, 0.0f );
 	_orientation = glm::quat( glm::vec3( 0.0f, 0.0f, 0.0f ) );
 	_speed = 3.0f;
 };
