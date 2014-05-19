@@ -18,7 +18,7 @@ int main( int argc, char **argv ) {
 	glutInitWindowSize( 1600, 900 );
 	glutInitWindowPosition( 0, 0 );
 	glutCreateWindow( "infinidungeon" );
-	glClearColor( 1.0, 0.0, 0.0, 1.0 );
+	glClearColor( 0.0, 0.0, 0.0, 1.0 );
 	glewExperimental = GL_TRUE;
 	glewInit();
 

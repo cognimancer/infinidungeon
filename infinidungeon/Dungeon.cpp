@@ -3,7 +3,7 @@
 
 Dungeon::Dungeon() : _roomCount( 0 ), _map( map2d() ) {
 	_map[0] = std::unordered_map<int, Room*>();
-	_map[0][0] = new Room("startRoom", 0, 0, Room::ROOM_DEADEND);
+	//_map[0][0] = new Room(this, "startRoom", 0, 0, Room::ROOM_DEADEND);
 }
 
 Dungeon::~Dungeon() {
@@ -21,7 +21,7 @@ Room* Dungeon::getRoom(int row, int col) {
 	if (_map.find(row) == _map.end()) _map[row] = std::unordered_map<int, Room*>(); //create row if it doesn't exist
 	//if there is no room at given coords, create one
 	//TODO: not always crossroads
-	if (_map[row].find(col) == _map[row].end()) _map[row][col] = new Room( "room" + std::to_string(_roomCount++), row, col, Room::ROOM_CROSSROADS);
+	if (_map[row].find(col) == _map[row].end()) _map[row][col] = new Room( this, "room" + std::to_string(_roomCount++), row, col, Room::ROOM_CROSSROADS);
 
 	return _map[row][col];
 }

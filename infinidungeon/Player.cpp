@@ -75,13 +75,14 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if (_position.y < groundLevel) {
 		_position.y = groundLevel;
 		zVelocity = 0;
+		getCurrentRoom();
+	std::cout << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
 	}
 	// restrict camera to room dimensions
 	//FIXME temp disabled to demo moving between rooms - should be moved to Player or Room
 	//	_position.x = glm::clamp(_position.x, -22.0f, 22.0f);
 	//	_position.z = glm::clamp(_position.z, -21.0f, 21.0f);
-	//getCurrentRoom();
-	//std::cout << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+	
 	Camera::getInstance()->move(_position, _orientation);
 }
 
@@ -92,31 +93,28 @@ void Player::setCurrentRoom(Room* givenRoom)
 
 Room* Player::getCurrentRoom()
 {
-	double roomRadius = (currentRoom->roomWidth()/2);
-	glm::vec3 currentRoomCenter = glm::vec3(
-		(currentRoom->getColumn() * currentRoom->roomWidth()) - roomRadius,
-		0,
-		(currentRoom->getRow() * currentRoom->roomWidth()) - roomRadius);
-	double distance = sqrt(((currentRoomCenter.x - _position.x)*(currentRoomCenter.x - _position.x))+((currentRoomCenter.z - _position.z)*(currentRoomCenter.z - _position.z)));
-	if (distance > roomRadius)
-	{
-		if(_position.x-currentRoomCenter.x > roomRadius)
+	double roomRadius = (Room::roomWidth()/2);
+	double distX = currentRoom->getColumn() * Room::roomWidth() - _position.x;
+	double distY = currentRoom->getRow() * Room::roomWidth() - _position.z;
+//	if (distance > roomRadius)
+//	{
+		if(distX > roomRadius)
 		{//east
 			return currentRoom = currentRoom->east;
 		}
-		else if (_position.x-currentRoomCenter.x < roomRadius)
+		else if (distX < -roomRadius)
 		{//west
 			return currentRoom = currentRoom->west;
 		}
-		else if (_position.z-currentRoomCenter.z > roomRadius)
+		else if (distY > roomRadius)
 		{//north
 			return currentRoom = currentRoom->north;
 		}
-		else if (_position.z-currentRoomCenter.z < roomRadius)
+		else if (distY < -roomRadius)
 		{//south
 			return currentRoom = currentRoom->south;
 		}
-	}
+	//}
 	return currentRoom;
 }
 

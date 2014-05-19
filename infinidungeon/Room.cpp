@@ -1,7 +1,7 @@
 #include "Room.h"
 #include "Dungeon.h"
 
-Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _name( name ), _rotation( rotation ), _row( row ), _col( col ),
+Room::Room( Dungeon* theDungeon, std::string name, int row, int col, int roomType, int rotation ) : dungeonInstance(theDungeon), _name( name ), _rotation( rotation ), _row( row ), _col( col ),
 		north( nullptr ), east( nullptr ), south( nullptr ), west( nullptr ),
 		exitNorth(false), exitEast(false), exitSouth(false), exitWest(false){
 	//load model for given roomtype
@@ -27,7 +27,12 @@ Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _
 	}
 	//modify available exits due to room rotation
 	switch(rotation) {
-	case 0: break;
+	case 0: 
+		exitNorth = n;
+		exitEast = e;
+		exitSouth = s;
+		exitWest = w;
+		break;
 	case 90: 
 		exitNorth = w;
 		exitEast = n;
@@ -55,18 +60,41 @@ Room::Room( std::string name, int row, int col, int roomType, int rotation ) : _
 	setModelMatrix();
 }
 
-void Room::render() {
+void Room::render(bool renderNeighbors) {
 	ModelManagerClass::GetInstance()->RenderModel( _name );
-	if (exitNorth) {
-
+	if (renderNeighbors) {
+		if (exitNorth) {
+			Room* northNeighbor = dungeonInstance->getRoom(_row-1, _col);
+			north = northNeighbor;
+			northNeighbor->south = this;
+			northNeighbor->render(false);
+		}
+		if (exitSouth) {
+			Room* southNeighbor = dungeonInstance->getRoom(_row+1, _col);
+			south = southNeighbor;
+			southNeighbor->north = this;
+			southNeighbor->render(false);
+		}
+		if (exitEast) {
+			Room* eastNeighbor = dungeonInstance->getRoom(_row, _col-1);
+			east = eastNeighbor;
+			eastNeighbor->west = this;
+			eastNeighbor->render(false);
+		}
+		if (exitWest) {
+			Room* westNeighbor = dungeonInstance->getRoom(_row, _col+1);
+			west = westNeighbor;
+			westNeighbor->east = this;
+			westNeighbor->render(false);
+		}
 	}
 }
-
+/*
 void Room::setRotation( float deg ) {
 	_rotation = deg;
 	setModelMatrix();
 }
-
+*/
 void Room::setPosition( int row, int col ) {
 	_row = row;
 	_col = col;
@@ -75,7 +103,7 @@ void Room::setPosition( int row, int col ) {
 
 void Room::setModelMatrix() {
 	glm::mat4 matrix = glm::translate( glm::mat4(), glm::vec3( roomWidth()*_col, 0.0f, roomWidth()*_row ) );
-	matrix = glm::rotate(matrix, _rotation, glm::vec3( 0.0f, 1.0f, 0.0f ) );
+	matrix = glm::rotate(matrix, (float)_rotation, glm::vec3( 0.0f, 1.0f, 0.0f ) );
 	ModelManagerClass::GetInstance()->SetModelMatrix( matrix, _name );
 }
 

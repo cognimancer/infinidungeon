@@ -2,6 +2,7 @@
 #define DUNGEON_H
 #include <unordered_map>
 #include <queue>
+class Dungeon;
 #include "Room.h"
 typedef std::unordered_map<int, std::unordered_map<int, Room*>> map2d;
 

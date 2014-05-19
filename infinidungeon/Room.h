@@ -24,9 +24,9 @@ public:
 	bool exitWest;
 
 	//room rotations are clockwise
-	Room( std::string name, int row = 0, int col = 0, int roomType = 1, int rotation = 0 );
-	void render();
-	void setRotation( float deg = 0.0f );
+	Room( Dungeon* theDungeon, std::string name, int row = 0, int col = 0, int roomType = 1, int rotation = 0 );
+	void render(bool renderNeighbors = false);
+	//void setRotation( float deg = 0.0f );
 	void setPosition( int row = 0, int col = 0 );
 
 	int getColumn();
@@ -34,9 +34,10 @@ public:
 
 private:
 	std::string _name;
-	float _rotation;
+	int _rotation;
 	int _row;
 	int _col;
+	Dungeon* dungeonInstance;
 
 	void setModelMatrix();
 };
