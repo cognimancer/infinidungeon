@@ -16,7 +16,7 @@ public:
 	}
 
 	void setSpeed( float speed );
-
+	Room* checkRoom();
 	
 	void move(glm::vec3 directions, glm::vec2 rotations, float frametime, bool sprinting = false, bool jump = false);
 

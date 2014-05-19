@@ -27,6 +27,9 @@ public:
 	void setRotation( float deg = 0.0f );
 	void setPosition( int row = 0, int col = 0 );
 
+	int getColumn();
+	int getRow();
+
 private:
 	std::string _name;
 	float _rotation;
