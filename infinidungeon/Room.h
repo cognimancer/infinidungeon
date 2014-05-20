@@ -26,8 +26,6 @@ public:
 	//room rotations are clockwise
 	Room( Dungeon* theDungeon, std::string name, int row = 0, int col = 0, int roomType = 1, int rotation = 0 );
 	void render(bool renderNeighbors = false);
-	//void setRotation( float deg = 0.0f );
-	void setPosition( int row = 0, int col = 0 );
 
 	int getColumn();
 	int getRow();

@@ -58,6 +58,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	tmp.y = 0;
 	tmp = glm::normalize( tmp );
 
+	// calculate position
 	float delta = _speed * (sprinting ? 3.0f : 1.0f);
 	// jumping
 	//if (_position.y == groundLevel && jump) _position.y = 10;
@@ -76,13 +77,57 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 		_position.y = groundLevel;
 		zVelocity = 0;
 		getCurrentRoom();
-	std::cout << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+		std::cout << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
 	}
-	// restrict camera to room dimensions
-	//FIXME temp disabled to demo moving between rooms - should be moved to Player or Room
-	//	_position.x = glm::clamp(_position.x, -22.0f, 22.0f);
-	//	_position.z = glm::clamp(_position.z, -21.0f, 21.0f);
+
+	// collision and room changing
+	double roomRadius = Room::roomWidth() / 2;
+	double innerRadius = (Room::roomWidth() - 16.0) / 2;
+	double exitRadius = 2.3;
+	double distX = _position.x - currentRoom->getColumn() * Room::roomWidth();
+	double distY = _position.z - currentRoom->getRow() * Room::roomWidth();
+	if( distX > innerRadius ) { // past east wall
+		if( !currentRoom->exitEast || distY >= exitRadius || distY <= -exitRadius ) {
+			// collision - stay at east wall
+			_position.x = currentRoom->getColumn() * Room::roomWidth() + innerRadius;
+		} else if( distX > roomRadius ) {
+			// moved to east room
+			currentRoom = currentRoom->east;
+			std::cout << "moved east to room " << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+		} // else in east hallway
+	}
+	if( distX < -innerRadius ) { // past west wall
+		if( !currentRoom->exitWest || distY >= exitRadius || distY <= -exitRadius ) {
+			// collision - stay at west wall
+			_position.x = currentRoom->getColumn() * Room::roomWidth() - innerRadius;
+		} else if( distX < -roomRadius ) {
+			// moved to west room
+			currentRoom = currentRoom->west;
+			std::cout << "moved west to room " << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+		} // else in west hallway
+	}
+	if( distY > innerRadius) { // past north wall
+		if( !currentRoom->exitNorth || distX >= exitRadius || distX <= -exitRadius ) {
+			// collision - stay at north wall
+			_position.z = currentRoom->getRow() * Room::roomWidth() + innerRadius;
+		} else if( distY > roomRadius ) {
+			// moved to north room
+			currentRoom = currentRoom->north;
+			std::cout << "moved north to room " << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+		} // else in north hallway
+	}
+	if( distY < -innerRadius) { // past south wall
+		if( !currentRoom->exitSouth || distX >= exitRadius || distX <= -exitRadius ) {
+			// collision - stay at south wall
+			_position.z = currentRoom->getRow() * Room::roomWidth() - innerRadius;
+		} else if( distY < -roomRadius ) {
+			// moved to south room
+			currentRoom = currentRoom->south;
+			std::cout << "moved south to room " << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
+		} // else in south hallway
+	}
 	
+	// move camera
 	Camera::getInstance()->move(_position, _orientation);
 }
 
@@ -93,28 +138,6 @@ void Player::setCurrentRoom(Room* givenRoom)
 
 Room* Player::getCurrentRoom()
 {
-	double roomRadius = (Room::roomWidth()/2);
-	double distX = currentRoom->getColumn() * Room::roomWidth() - _position.x;
-	double distY = currentRoom->getRow() * Room::roomWidth() - _position.z;
-//	if (distance > roomRadius)
-//	{
-		if(distX > roomRadius)
-		{//east
-			return currentRoom = currentRoom->east;
-		}
-		else if (distX < -roomRadius)
-		{//west
-			return currentRoom = currentRoom->west;
-		}
-		else if (distY > roomRadius)
-		{//north
-			return currentRoom = currentRoom->north;
-		}
-		else if (distY < -roomRadius)
-		{//south
-			return currentRoom = currentRoom->south;
-		}
-	//}
 	return currentRoom;
 }
 

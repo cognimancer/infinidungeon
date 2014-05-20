@@ -64,41 +64,30 @@ void Room::render(bool renderNeighbors) {
 	ModelManagerClass::GetInstance()->RenderModel( _name );
 	if (renderNeighbors) {
 		if (exitNorth) {
-			Room* northNeighbor = dungeonInstance->getRoom(_row-1, _col);
+			Room* northNeighbor = dungeonInstance->getRoom(_row+1, _col);
 			north = northNeighbor;
 			northNeighbor->south = this;
 			northNeighbor->render(false);
 		}
 		if (exitSouth) {
-			Room* southNeighbor = dungeonInstance->getRoom(_row+1, _col);
+			Room* southNeighbor = dungeonInstance->getRoom(_row-1, _col);
 			south = southNeighbor;
 			southNeighbor->north = this;
 			southNeighbor->render(false);
 		}
 		if (exitEast) {
-			Room* eastNeighbor = dungeonInstance->getRoom(_row, _col-1);
+			Room* eastNeighbor = dungeonInstance->getRoom(_row, _col+1);
 			east = eastNeighbor;
 			eastNeighbor->west = this;
 			eastNeighbor->render(false);
 		}
 		if (exitWest) {
-			Room* westNeighbor = dungeonInstance->getRoom(_row, _col+1);
+			Room* westNeighbor = dungeonInstance->getRoom(_row, _col-1);
 			west = westNeighbor;
 			westNeighbor->east = this;
 			westNeighbor->render(false);
 		}
 	}
-}
-/*
-void Room::setRotation( float deg ) {
-	_rotation = deg;
-	setModelMatrix();
-}
-*/
-void Room::setPosition( int row, int col ) {
-	_row = row;
-	_col = col;
-	setModelMatrix();
 }
 
 void Room::setModelMatrix() {

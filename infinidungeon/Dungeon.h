@@ -12,7 +12,6 @@ public:
 	~Dungeon();
 
 	Room* getRoom(int row, int col);
-	void renderRoom( int row, int col );
 private:
 	// row-major map of rooms
 	map2d _map;

@@ -44,7 +44,6 @@ void DungeonScreen::display() {
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );     // clear the window
 	glEnable( GL_DEPTH_TEST );
 	Player::getInstance()->getCurrentRoom()->render(true);
-	//_dungeon->getRoom( 0, 0 )->render(true); //TODO get current room/position from Player
 	glutSwapBuffers();
 } // display
 
