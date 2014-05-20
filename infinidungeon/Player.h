@@ -32,6 +32,7 @@ private:
 	static Player* m_pInstance;//Singleton
 	//Position
 	glm::vec3 _position;
+	glm::vec3 _prevPosition;
 	//Orientation
 	glm::quat _orientation;
 
