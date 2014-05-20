@@ -94,7 +94,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 				_position.z = distY > exitRadius ? centerY + exitRadius
 					: centerY - exitRadius;
 			} else { // was in room
-				_position.x = centerX + innerRadius;
+				_position.x = centerX + innerRadius - 0.0001f;
 			}
 		} // else in east hallway
 	}
@@ -105,7 +105,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 				_position.z = distY > exitRadius ? centerY + exitRadius
 					: centerY - exitRadius;
 			} else { // was in room
-				_position.x = centerX - innerRadius;
+				_position.x = centerX - innerRadius + 0.0001f;
 			}
 		} // else in west hallway
 	}
@@ -116,7 +116,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 				_position.x = distX > exitRadius ? centerX + exitRadius
 					: centerX - exitRadius;
 			} else { // was in room
-				_position.z = centerY + innerRadius;
+				_position.z = centerY + innerRadius - 0.0001f;
 			}
 		} // else in north hallway
 	}
@@ -127,7 +127,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 				_position.x = distX > exitRadius ? centerX + exitRadius
 					: centerX - exitRadius;
 			} else { // was in room
-				_position.z = centerY - innerRadius;
+				_position.z = centerY - innerRadius + 0.0001f;
 			}
 		} // else in south hallway
 	}
