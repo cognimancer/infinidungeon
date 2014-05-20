@@ -77,8 +77,6 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if (_position.y < groundLevel) {
 		_position.y = groundLevel;
 		zVelocity = 0;
-		getCurrentRoom();
-		std::cout << currentRoom->getColumn() << "," << currentRoom->getRow() << std::endl;
 	}
 
 	// collision and room changing
@@ -92,7 +90,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if( distX > innerRadius ) { // past east wall
 		if( !currentRoom->exitEast || distY > exitRadius || distY < -exitRadius ) {
 			// collision - stay at east wall
-			if( _prevPosition.x - centerX > innerRadius ) { // was in hallway
+			if( currentRoom->exitEast && _prevPosition.x - centerX > innerRadius ) { // was in hallway
 				_position.z = distY > exitRadius ? centerY + exitRadius
 					: centerY - exitRadius;
 			} else { // was in room
@@ -103,7 +101,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if( distX < -innerRadius ) { // past west wall
 		if( !currentRoom->exitWest || distY > exitRadius || distY < -exitRadius ) {
 			// collision - stay at west wall
-			if( _prevPosition.x - centerX < -innerRadius ) { // was in hallway
+			if( currentRoom->exitWest && _prevPosition.x - centerX < -innerRadius ) { // was in hallway
 				_position.z = distY > exitRadius ? centerY + exitRadius
 					: centerY - exitRadius;
 			} else { // was in room
@@ -114,7 +112,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if( distY > innerRadius) { // past north wall
 		if( !currentRoom->exitNorth || distX > exitRadius || distX < -exitRadius ) {
 			// collision - stay at north wall
-			if( _prevPosition.z - centerY > innerRadius ) { // was in hallway
+			if( currentRoom->exitNorth && _prevPosition.z - centerY > innerRadius ) { // was in hallway
 				_position.x = distX > exitRadius ? centerX + exitRadius
 					: centerX - exitRadius;
 			} else { // was in room
@@ -125,7 +123,7 @@ void Player::move(glm::vec3 directions, glm::vec2 rotations, float frametime, bo
 	if( distY < -innerRadius) { // past south wall
 		if( !currentRoom->exitSouth || distX > exitRadius || distX < -exitRadius ) {
 			// collision - stay at south wall
-			if( _prevPosition.z - centerY < -innerRadius ) { // was in hallway
+			if( currentRoom->exitSouth && _prevPosition.z - centerY < -innerRadius ) { // was in hallway
 				_position.x = distX > exitRadius ? centerX + exitRadius
 					: centerX - exitRadius;
 			} else { // was in room
