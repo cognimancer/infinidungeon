@@ -15,8 +15,8 @@ Room::Room( Dungeon* theDungeon, std::string name, int row, int col, int roomTyp
 	bool e = false;
 	bool w = false;
 	switch(roomType) {
-	case ROOM_DEADEND: n = true; break;
-	case ROOM_ELBOW: n = true; w = true; break;
+	case ROOM_DEADEND: s = true; break;
+	case ROOM_ELBOW: s = true; w = true; break;
 	case ROOM_HALL: n = true; s = true; break;
 	case ROOM_T_JOINT: n = true; w = true; s = true; break;
 	case ROOM_CROSSROADS: n = true; w = true; s = true; e = true; break;
